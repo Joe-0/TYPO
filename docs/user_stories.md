@@ -96,6 +96,20 @@ As a Typist, I want to track my progress so that I can see how much of the chall
    6. View 100% completion
 
 
+[Typing Challenges] Challenge End
+-----------------------
+As a Challenger, I want to end the challenge after I've typed all of its content so that the timer does not continue counting down and affecting my typing statistics.
+
+ - Priority: HH
+ - Estimate: 4
+ - Confirmation:
+
+   1. Start challenge
+   2. Timer Start
+   3. Type all challenge content
+   4. Challenge ends
+   5. Timer ends
+
 [Typing Challenges] View Results
 -----------------------
 As a Typist, I want to see my typing statistic results after I finish a challenge so that I can gain the benefit of knowing my typing speed and accuracy
