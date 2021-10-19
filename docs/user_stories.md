@@ -55,6 +55,18 @@ As a Challenger, I want to view the text of the challenge so that I can type the
    1. Start Challenge
    2. View challenge text
 
+[Typing Challenges] Challenge Typing 
+-----------------------
+As a Typist, I want to type the challenge text into some text input so that I can work towards completing the challenge.
+
+ - Priority: HH
+ - Estimate: 3
+ - Confirmation:
+
+   1. Start Challenge
+   2. View challenge text
+   3. Begin typing challenge text
+
 [Typing Challenges] Challenge START
 -----------------------
 As a Challenger, I want to have a restart button for the challenge so that I can decide when to cut my losses and redo the challenge if/when I make a mistake.
