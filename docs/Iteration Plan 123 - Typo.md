@@ -8,16 +8,27 @@
 4. [4] As a Challenger, I want a timer that counts down so that I can gauge my time remaining.
 5. [4] As a Challenger, I want to end the challenge after I've typed all of its content so that the timer does not continue counting down and affecting my typing statistics.
 ### Structure Planning
-1. Database setup for challenges 
-2. Database setup for users
-3. Navigation
-4. Basic Interactions for User
+1. Database setup for challenges
+2. Navigation
+3. Basic Interactions for User
 
-## Week 2 [NF - Unplanned]
+## Week 2 
 ### Assoc. User Stories
-1.  [5] As a Typist, I want to see my typing statistic results after I finish a challenge so that I can gain the benefit of knowing my typing speed and accuracy.
+1. [5] As a Typist, I want to see my typing statistic results after I finish a challenge so that I can gain the benefit of knowing my typing speed and accuracy.
 2. [5] As a Challenger, I want the text to be different every time I begin a new challenge so that I can test my stats in general and not in one situation. 
+3. [1] As a Challenger, I want to have a start button for the challenge so that I can decide when to begin.
+4. [1] As a Challenger, I want to have a restart button for the challenge so that I can decide when to cut my losses and redo the challenge if/when I make a mistake.
+### Structure Planning
+1. Database setup for users
+2. Work on layout of testing page
+3. Access time for calculations
 
-## Week 3 [NF - Unplanned]
+## Week 3 
 ### Assoc. User Stories
-
+1. [5] As a User, I want to see my aggregate wpm so that I can have a better understanding of my typing speed.
+2. [5] As a User, I want to see my aggregate accuracy so that I can have a better understanding of my typing accuracy.
+3. [4] As a User, I want to see my own high score after I complete a challenge so that I can track my peak stats.
+### Structure Planning
+1. Continue work on layout of testing page
+2. Start work on layout of user page
+3. Work on calculating and displaying WPM and accuracy
