@@ -149,7 +149,7 @@ As a User, I want to see my aggregate accuracy so that I can have a better under
 
 [EPIC] Typing Statistics Tracking
 -----------------------
-As a User, I want to track all my typing statis so that I can see my own improvement and current typing level.
+As a User, I want to track all my typing statistics so that I can see my own improvement and current typing level.
 
  - Priority: H
  - Estimate: 6
