@@ -55,19 +55,8 @@ As a Challenger, I want to view the text of the challenge so that I can type the
    1. Start Challenge
    2. View challenge text
 
-[Typing Challenges] Challenge Typing 
------------------------
-As a Typist, I want to type the challenge text into some text input so that I can work towards completing the challenge.
 
- - Priority: HH
- - Estimate: 3
- - Confirmation:
-
-   1. Start Challenge
-   2. View challenge text
-   3. Begin typing challenge text
-
-[Typing Challenges] Challenge START
+[Typing Challenges] Challenge RESTART
 -----------------------
 As a Challenger, I want to have a restart button for the challenge so that I can decide when to cut my losses and redo the challenge if/when I make a mistake.
 
@@ -79,6 +68,8 @@ As a Challenger, I want to have a restart button for the challenge so that I can
    2. Continue typing
    3. Press restart button
    4. Challenge starts from beginning
+
+- Dependencies: Viewing challenge text
 
 [Typing Challenges] Track Progress in Challenge
 -----------------------
@@ -95,20 +86,8 @@ As a Typist, I want to track my progress so that I can see how much of the chall
    5. Finish challenge
    6. View 100% completion
 
+- Dependencies: Viewing challenge text
 
-[Typing Challenges] Challenge End
------------------------
-As a Challenger, I want to end the challenge after I've typed all of its content so that the timer does not continue counting down and affecting my typing statistics.
-
- - Priority: HH
- - Estimate: 4
- - Confirmation:
-
-   1. Start challenge
-   2. Timer Start
-   3. Type all challenge content
-   4. Challenge ends
-   5. Timer ends
 
 [Typing Challenges] View Results
 -----------------------
@@ -122,6 +101,8 @@ As a Typist, I want to see my typing statistic results after I finish a challeng
    2. Collect stats based on time and correctness
    3. View collected stats
 
+- Dependencies: Viewing challenge text, Track Progress in Challenge, WPM, Accuracy
+
 [Typing Challenges] Different Challenge Text
 -----------------------
 As a Challenger, I want the text to be different every time I begin a new challenge so that I can test my stats in general and not in one situation.
@@ -133,6 +114,8 @@ As a Challenger, I want the text to be different every time I begin a new challe
    1. View Challenge selection OR Click “new challenge”
    2. Start challenge
    2. View unique challenge text
+
+- Dependencies: Viewing challenge text, Administrator Challenge Insertion
 
 [Typing Statistics Tracking] WPM
 -----------------------
@@ -147,6 +130,8 @@ As a User, I want to see my aggregate wpm so that I can have a better understand
    3. Generate Average
    4. Store Average
 
+- Dependencies: View Results, Timer
+
 [Typing Statistics Tracking] Accuracy
 -----------------------
 As a User, I want to see my aggregate accuracy so that I can have a better understanding of my typing accuracy.
@@ -160,9 +145,11 @@ As a User, I want to see my aggregate accuracy so that I can have a better under
    3. Generate Average
    4. Store Average
 
+- Dependencies: View Results, Timer
+
 [EPIC] Typing Statistics Tracking
 -----------------------
-As a User, I want to track all my typing  statis so that I can see my own improvement and current typing level.
+As a User, I want to track all my typing statis so that I can see my own improvement and current typing level.
 
  - Priority: H
  - Estimate: 6
@@ -171,6 +158,8 @@ As a User, I want to track all my typing  statis so that I can see my own improv
    1. Collect typing statistics
    2. Store typing statistics
    3. View the current statistics on user screen
+
+- Dependencies: View Results, WPM, Accuracy
 
 [Typing Challenges] Challenge START
 -----------------------
@@ -184,6 +173,8 @@ As a Challenger, I want to have a start button for the challenge so that I can d
    2. Click button
    2. Challenge begins
 
+- Dependencies: Viewing challenge text, Administrator Challenge Insertion
+
 [Administrator Challenge Insertion] No Copyright
 -----------------------
 As an Administrator, I want to use non-copyright text so that I don’t get sued.
@@ -195,6 +186,7 @@ As an Administrator, I want to use non-copyright text so that I don’t get sued
    1. Collect non-copyright text
    2. Insert Text as Challenge
 
+- Dependencies: Administrator Challenge Insertion
 
 [Typing Challenges] Character Confirmation
 -----------------------
@@ -207,6 +199,8 @@ As a Typist, I want the application to let me know when I input a character so t
    1. Type character
    2. View *some* character change
 
+- Dependencies: Viewing challenge text
+
 HI-SCORE
 -----------------------
 As a User, I want to see my own high score after I complete a challenge so that I can track my peak stats.
@@ -218,6 +212,8 @@ As a User, I want to see my own high score after I complete a challenge so that 
    1. Collect typing statistics
    2. Store highest statistics
    3. View the current highest statistics on user screen
+
+- Dependencies: View Results, Database Setup
 
 
 [Administrator Challenge Insertion] Admin Sign-In
@@ -232,6 +228,8 @@ As an Administrator, I want to be able to sign into the website so that I can ac
    2. Type in admin user information
    3. Access site with ADMIN status/functions.
 
+- Dependencies: Database Setup
+
 [Typing Statistics Tracking] Challenge Completion
 -----------------------
 As a User, I want to see which challenges I have completed with my associated typing statistics on those challenges so that I can compare separate data by challenge to the aggregate scores.
@@ -245,6 +243,8 @@ As a User, I want to see which challenges I have completed with my associated ty
    3. Store challenge statistics
    4. View on user screen
 
+- Dependencies: WPM, Accuracy, User Specific Dashboard
+
 User Registration
 -----------------------
 As a User, I want to register into the site with my personal information so that I can separate my progress from others by signing in.
@@ -257,6 +257,8 @@ As a User, I want to register into the site with my personal information so that
    2. Type new user information
    3. Get confirmation
    4. Able to use information to sign in later*
+
+- Dependencies: Database Setup, User Specific Dashboard
 
 
 User Sign-In
@@ -272,6 +274,7 @@ As a User, I want to sign into the site so that I can record my specific progres
    3. Type in user information
    4. View site as specific user
 
+- Dependencies: Database Setup
 
 
 [EPIC] Administrator Challenge Insertion
@@ -287,6 +290,8 @@ As an Administrator, I want to add a challenge database so that my users can acc
    3. Add text to challenge selection
    4. Challenge made available to users.
 
+- Dependencies: Database Setup
+
 Typing Statistics Sharing
 -----------------------
 As a User, I want to export my score data so that I can share it with others.
@@ -299,17 +304,21 @@ As a User, I want to export my score data so that I can share it with others.
    2. Collect challenge data into copyable format
    3. Copy Data
 
+- Dependencies: Database Setup, User Specific Dashboard
+
 [Typing Challenges] Challenge Timer
 -----------------------
-As a Challenger, I want a timer that counts down so that I can gauge my time remaining.
+As a Challenger, I want a timer that counts up so that I can gauge my time remaining.
 
- - Priority: L
+ - Priority: H
  - Estimate: 4
  - Confirmation:
 
    1. Start Challenge
-   2. Time counter lowers each second
-   3. Challenge ends at 0
+   2. Time counter raises each second
+   3. Saves time after challenge ends
+
+- Dependencies: Viewing Challenge Text
 
 [Administrator Challenge Insertion] Language Filtering
 -----------------------
@@ -322,6 +331,8 @@ As an Administrator, I want the option of filtering adult language out of the te
    1. Check challenge text against “adult language” database. 
    2. Remove adult language from challenge
    2X. OR filter challenges out of challenge list.
+   
+ - Dependencies: Database Setup
 
 Cross-User Typing Speed 
 -----------------------
@@ -334,6 +345,8 @@ As a User, I want to see other users’ overall typing speed so that I can compa
    1. Sign in as User
    2. Select other registered user
    3. View other user’s typing speed  
+
+ - Dependencies: WPM, Accuracy, Timer, Database Setup
 
 High Score Leaderboard
 -----------------------
@@ -348,4 +361,5 @@ As a User, I want to see other users’ high scores so that I can compare my sta
    3. Collect stats from other registered users
    3. Display other users’ stats
 
+ - Dependencies: WPM, Accuracy, Timer, Database Setup
 
