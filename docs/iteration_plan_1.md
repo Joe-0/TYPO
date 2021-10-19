@@ -2,15 +2,15 @@
 
 ## Week 1
 ### Assoc. User Stories
-1. [0] As a Challenger, I want to view the text of the challenge so that I can type the correct content. 
-2. [3] As a Typist, I want to track my progress so that I can see how much of the challenge remains. **(dependent on 1)**
-3. [3] As a Typist, I want to type the challenge text into some text input so that I can work towards completing the challenge. **(dependent on 1)**
-4. [4] As a Challenger, I want a timer that counts down so that I can gauge my time remaining.
-5. [4] As a Challenger, I want to end the challenge after I've typed all of its content so that the timer does not continue counting down and affecting my typing statistics.
+1. [0] As a Challenger, I want to view the text of the challenge so that I can type the correct content. **(Assigned to Isiah)**
+2. [3] As a Typist, I want to track my progress so that I can see how much of the challenge remains. **(dependent on 1)**  **(Assigned to Isiah)**
+3. [3] As a Typist, I want to type the challenge text into some text input so that I can work towards completing the challenge. **(dependent on 1)** **(Assigned to Rahul)**
+4. [4] As a Challenger, I want a timer that counts down so that I can gauge my time remaining. **(Assigned to Ali)**
+5. [4] As a Challenger, I want to end the challenge after I've typed all of its content so that the timer does not continue counting down and affecting my typing statistics. **(Assigned to Joe)**
 ### Structure Planning
-1. Database setup for challenges
-2. Navigation
-3. Basic Interactions for User
+1. View of main page **(Assigned to Isiah)**
+2. Database setup for challenges **(Assigned to Rahul)**
+3. Basic Interactions for User and Navigation **(Ali and Joe)
 
 ## Week 2 
 ### Assoc. User Stories
