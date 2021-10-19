@@ -10,7 +10,7 @@
 ### Structure Planning
 1. View of main page **(Assigned to Isiah)**
 2. Database setup for challenges **(Assigned to Rahul)**
-3. Basic Interactions for User and Navigation **(Ali and Joe)
+3. Basic Interactions for User and Navigation **(Assigned to Ali and Joe)**
 
 ## Week 2 
 ### Assoc. User Stories
