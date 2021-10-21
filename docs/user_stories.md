@@ -55,6 +55,16 @@ As a Challenger, I want to view the text of the challenge so that I can type the
    1. Start Challenge
    2. View challenge text
 
+[Typing Challenges] Text Box
+-----------------------
+As a Typist, I want to type the challenge text into some text input so that I can work towards completing the challenge.
+
+ - Priority: HH
+ - Estimate: 1
+ - Confirmation:
+
+   1. Type text into a text box on the challenge page
+   
 
 [Typing Challenges] Challenge RESTART
 -----------------------
