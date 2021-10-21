@@ -1,6 +1,6 @@
 import os
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, g, redirect, url_for, flash
+from flask import Flask, request, g, redirect, url_for, render_template, flash
 
 app = Flask(__name__)
 
@@ -10,7 +10,6 @@ app.config.update(dict(
     SECRET_KEY='development key',
 ))
 app.config.from_envvar('FLASKR_SETTINGS', silent=True)
-
 def connect_db():
     """Connects to the specific database."""
     rv = sqlite3.connect(app.config['DATABASE'])
@@ -41,6 +40,10 @@ def get_db():
         g.sqlite_db = connect_db()
     return g.sqlite_db
 
+
+@app.route('/')
+def show_index():
+    return render_template('index.html')
 
 @app.teardown_appcontext
 def close_db(error):
