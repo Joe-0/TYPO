@@ -1,9 +1,56 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head title = "Typo Site">
 
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
+
+    <title>Typo ¿</title>
 </head>
+
 <body>
-This is Some Text.
+<div class="pb-3 pt-3">
+    <div class="mx-auto bg-light border border-dark " style="width: 700px" ;>
+        <h1 class="text-dark ms-4">Typo ¿</h1>
+        <div class="px-4">
+
+            <div class="float-end d-inline">Time ELapsed:
+            <div class="timeElapsed d-inline" id="timeElapsed">0</div>
+            <div class="d-inline">s</div>
+            </div>
+            <br>
+            <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
+            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus></textarea>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+    const textDisplayElement = document.getElementById('textDisplay')
+    const testInputElement = document.getElementById('textInput')
+    const timeElapsedElement = document.getElementById('timeElapsed')
+
+    testInputElement.addEventListener('input',timePassed)
+
+    let startTime
+    function timePassed() {
+        timeElapsedElement.innerText = 0
+        startTime = new Date()
+        setInterval(() => {
+            timeElapsedElement.innerText = getTimerTime()
+        }, 1000)
+        testInputElement.removeEventListener('input',timePassed)
+    }
+    function getTimerTime() {
+        return Math.floor((new Date() - startTime) / 1000)
+    }
+</script>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-import os
+import os, random
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, flash
 
@@ -43,7 +43,12 @@ def get_db():
 
 @app.route('/')
 def show_index():
-    return render_template('index.html')
+    random_id = random.randint(1, 9)
+    db = get_db()
+    cur = db.execute('SELECT text FROM challengeText WHERE id=?', [random_id])
+    texts = cur.fetchone()
+    print(texts)
+    return render_template('index.html', texts=texts)
 
 @app.teardown_appcontext
 def close_db(error):
