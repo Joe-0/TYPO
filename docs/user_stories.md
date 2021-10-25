@@ -101,7 +101,7 @@ As a Typist, I want to track my progress so that I can see how much of the chall
 
 [Typing Challenges] View Results
 -----------------------
-As a Typist, I want to see my typing statistic results after I finish a challenge so that I can gain the benefit of knowing my typing speed and accuracy
+As a Typist, I want to see my results after I finish a challenge so that I can gain the benefit of knowing my typing speed and accuracy
 
  - Priority: H
  - Estimate: 5
