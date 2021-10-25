@@ -129,7 +129,7 @@ As a Challenger, I want the text to be different every time I begin a new challe
 
 [Typing Statistics Tracking] WPM
 -----------------------
-As a User, I want to see my aggregate wpm so that I can have a better understanding of my typing speed.
+As a User, I want to see my average wpm over multiple runs so that I can have a better understanding of my typing speed.
 
  - Priority: H
  - Estimate: 5
@@ -144,7 +144,7 @@ As a User, I want to see my aggregate wpm so that I can have a better understand
 
 [Typing Statistics Tracking] Accuracy
 -----------------------
-As a User, I want to see my aggregate accuracy so that I can have a better understanding of my typing accuracy.
+As a User, I want to see my average accuracy over multiple runs so that I can have a better understanding of my typing accuracy.
 
  - Priority: H
  - Estimate: 5
