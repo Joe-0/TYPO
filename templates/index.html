@@ -10,16 +10,22 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 
+    <!-- <link rel="stylesheet" href="main.css"> do we need this? idk-->
+
     <title>Typo ¿</title>
 </head>
 
 <body>
+
+
+
+
 <div class="pb-3 pt-3">
     <div class="mx-auto bg-light border border-dark " style="width: 700px" ;>
         <h1 class="text-dark ms-4">Typo ¿</h1>
         <div class="px-4">
 
-            <div class="float-end d-inline">Time ELapsed:
+            <div class="float-end d-inline">Time Elapsed:
             <div class="timeElapsed d-inline" id="timeElapsed">0</div>
             <div class="d-inline">s</div>
             </div>
@@ -30,6 +36,8 @@
     </div>
 
 </div>
+
+
 
 <script type="text/javascript">
     const textDisplayElement = document.getElementById('textDisplay')
@@ -51,6 +59,10 @@
         return Math.floor((new Date() - startTime) / 1000)
     }
 </script>
+
+
+
+    <script src="typo.js"></script>
 
 </body>
 </html>

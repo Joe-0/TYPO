@@ -45,7 +45,7 @@ def get_db():
 def show_index():
     random_id = random.randint(1, 9)
     db = get_db()
-    cur = db.execute('SELECT text FROM challengeText WHERE id=?', [random_id])
+    cur = db.execute('SELECT text FROM challengeText WHERE id=1')
     texts = cur.fetchone()
     print(texts)
     return render_template('index.html', texts=texts)
