@@ -19,9 +19,10 @@
 3. [1] As a Challenger, I want to have a start button for the challenge so that I can decide when to begin.
 4. [1] As a Challenger, I want to have a restart button for the challenge so that I can decide when to cut my losses and redo the challenge if/when I make a mistake.
 ### Structure Planning
-1. Database setup for users
-2. Work on layout of testing page
-3. Access time for calculations
+1. Database setup for user's login **(Assigned to Rahul)**
+2. View of main page **(Assigned to Isaiah)**
+3. Work on layout of testing page **(Assigned to Joe)**
+4. Access end time for calculations **(Assigned to Ali and Joe)**
 
 ## Week 3 
 ### Assoc. User Stories
