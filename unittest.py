@@ -1,3 +1,14 @@
+"""
+https://sun.iwu.edu/~mliffito/flask_tutorial/testing.html
+    Flaskr
+    ~~~~~~
+
+    A microblog example application written as Flask tutorial with
+    Flask and sqlite3.
+
+    :copyright: (c) 2015 by Armin Ronacher.
+    :license: BSD, see LICENSE for more details.
+"""
 import os
 import app as flaskr
 import unittest
