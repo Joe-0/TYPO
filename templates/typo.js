@@ -1,3 +1,4 @@
+//Timer code adapted from https://www.youtube.com/watch?v=R-7eQIHRszQ
 var challengeText = getElementbyID(textDisplay.innerText);
 var userText = getElementbyID(textInput.innerText);
 
