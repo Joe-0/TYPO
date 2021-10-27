@@ -15,32 +15,38 @@
     <title>Typo ¿</title>
 </head>
 
-<body>
+<body class = "bg-dark text-light">
 
 
-
-
-<div class="pb-3 pt-3">
-    <div class="mx-auto bg-light border border-dark " style="width: 700px" ;>
-        <h1 class="text-dark ms-4">Typo ¿</h1>
-        <div class="px-4">
-
-            <div class="float-end d-inline">Time Elapsed:
-            <div class="timeElapsed d-inline" id="timeElapsed">0</div>
-            <div class="d-inline">s</div>
-            </div>
-            <br>
+<div class = "container w-100" id = "testText" >
+    <div class = row>
+        <div class = "col"></div>
+        <div class = "col">
             <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
-            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus></textarea>
-            <div class="float-end d-inline">
-                <button onclick="timePassed()">Submit</button>
-
-                </div>
-
         </div>
+        <div class = "col"></div>
+    </div>
+    <div class = "row align-items-center">
+        <div class = "col">
+            <p>TYPO</p>
+        </div>
+        <div class = "col-8">
+            <textarea class="bg-dark text-light text-input rounded w-100 pt-3 pb-5" style = "border: none; outline: none; caret-color: darkmagenta;" placeholder = "To begin, start typing..."id="textInput" autofocus></textarea>
+        </div>
+        <div class = "col">
+            <p>TEST</p>
+        </div>
+    </div>
+    <div class = "row mt-5">
+        <div class="col"></div>
+        <div class = "col align-self-center">
+            <button onclick="timePassed()" class = "btn btn-light">Submit</button>
+        </div>
+        <div class="col"></div>
     </div>
 
 </div>
+
 
 
 
