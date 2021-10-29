@@ -31,7 +31,7 @@
             </div>
             <br>
             <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
-            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus></textarea>
+            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus placeholder="Begin typing when ready"></textarea>
             <div class="float-end d-inline">
                 <button onclick="timePassed()">Submit</button>
 
@@ -42,43 +42,7 @@
 
 </div>
 
-
-
-<script type="text/javascript">
-    const textDisplayElement = document.getElementById('textDisplay')
-    const testInputElement = document.getElementById('textInput')
-    const timeElapsedElement = document.getElementById('timeElapsed')
-
-    testInputElement.addEventListener('input',timePassed)
-
-
-
-    let startTime
-    function timePassed() {
-        timeElapsedElement.innerText = 0
-        startTime = new Date()
-        setInterval(() => {
-            timeElapsedElement.innerText = getTimerTime()
-        }, 1000)
-        getEndTime()
-        testInputElement.removeEventListener('input',timePassed)
-    }
-
-    function getTimerTime() {
-        return Math.floor((new Date() - startTime) / 1000)
-    }
-    let endTime
-    function getEndTime(){
-        endTime = Math.floor((new Date() - startTime) / 1000)
-       console.log(getTimerTime())
-    }
-
-
-</script>
-
-
-
-    <script src="typo.js"></script>
+<script type="text/javascript"  src="{{url_for('static', filename='typo.js')}}"></script>
 
 </body>
 </html>

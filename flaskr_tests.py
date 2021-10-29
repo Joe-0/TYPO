@@ -27,3 +27,7 @@ class FlaskrTestCase(unittest.TestCase):
         os.close(self.db_fd)
         os.unlink(flaskr.app.config['DATABASE'])
 
+    def test_show_index(self):
+        rv = self.app.get('/')
+        assert b'Begin typing when ready' in rv.data
+
