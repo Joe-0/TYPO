@@ -12,7 +12,7 @@ https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
 
 import os, random
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, g, redirect, url_for, render_template, flash
+from flask import Flask, request, g, redirect, url_for, render_template
 
 app = Flask(__name__)
 
