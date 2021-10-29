@@ -10,9 +10,10 @@ https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
     :license: BSD, see LICENSE for more details.
 """
 
-import os, random
+import os, random, werkzeug
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory
+
 
 app = Flask(__name__)
 
@@ -57,6 +58,8 @@ def get_db():
 def show_index():
     random_id = random.randint(1, 9)
     db = get_db()
+    ##IMPORTANT, THE BOTTOM "id = 1" IS ONLY A TEMPORARY MEASURE CHANGE IT TO RANDOM ID
+    # WHEN WE ACTUALLY HAVE TEXT"
     cur = db.execute('SELECT text FROM challengeText WHERE id=1')
     texts = cur.fetchone()
     print(texts)
@@ -68,3 +71,21 @@ def close_db(error):
     if hasattr(g, 'sqlite_db'):
         g.sqlite_db.close()
 
+#This function takes a username and password input and (hopefully) securely stores them into a users database
+@app.route('/register')
+def register():
+    db = get_db()
+    ##the following code will enter a new username and a hashed version of a new password into users.
+    #note that this function does not check for repeats of the same username
+    db.execute('insert into users (username, password) values (?, ?, ?)',
+               [request.form['username'],
+                werkzeug.security.generate_password_hash(request.form['password'], method='pbkdf2:sha256',
+                                                         salt_length=16)])
+
+#This function logs a user given a username and password. Not quite sure which website to redirect to.
+@app.route('/login')
+def login():
+    db = get_db()
+    password = db.execute('select password from users where username = ?',  request.form['username'])
+    if werkzeug.security.check_password_hash(password, request.form['password']) == True:
+        login; #?
