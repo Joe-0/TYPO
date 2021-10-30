@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="stylesheet" href="/static/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
@@ -18,31 +19,42 @@
 <body>
 
 
-
-
 <div class="pb-3 pt-3">
-    <div class="mx-auto bg-light border border-dark " style="width: 700px" ;>
+    <div class="mx-auto bg-light border border-dark " style="width: 700px">
         <h1 class="text-dark ms-4">Typo ¿</h1>
         <div class="px-4">
 
             <div class="float-end d-inline">Time Elapsed:
-            <div class="timeElapsed d-inline" id="timeElapsed">0</div>
-            <div class="d-inline">s</div>
+                <div class="timeElapsed d-inline" id="timeElapsed">0</div>
+                <div class="d-inline">s</div>
             </div>
             <br>
-            <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
-            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus placeholder="Begin typing when ready"></textarea>
-            <div class="float-end d-inline">
-                <button onclick="timePassed()">Submit</button>
+            <div class="text-display font-weight-bold text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
+            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus
+                      placeholder="Begin typing when ready"></textarea>
 
+            <div class="text-center pt-5 pb-5">
+                <div class=" d-inline pb-3 pt-4"> Words Per Minute:
+                    <div class="WPM d-inline" id="WPM">-</div>
                 </div>
+                <br>
+                <div class="d-inline pb-4 pt-2">Characters Per Minute:
+                    <div class="CPM d-inline" id="CPM">-</div>
+                </div>
+                <br>
+                <div class="d-inline pb-4 pt-2">Accuracy:
+                    <div class="accuracy d-inline" id="accuracy">-</div>
+                    <div class="d-inline">%</div>
+                </div>
+            </div>
+
 
         </div>
     </div>
 
 </div>
 
-<script type="text/javascript"  src="{{url_for('static', filename='typo.js')}}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='typo.js') }}"></script>
 
 </body>
 </html>
