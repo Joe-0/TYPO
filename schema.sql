@@ -1,4 +1,5 @@
 drop table if exists challengeText;
+drop table if exists users;
 create table challengeText (
   id integer primary key autoincrement,
   title text not null,
