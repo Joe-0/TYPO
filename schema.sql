@@ -17,5 +17,5 @@ drop table if exists attempts;
 create table attempts {
   id integer primary key autoincrement,
   user text,
-  time not null
+  time int not null
 }
