@@ -5,8 +5,9 @@ create table challengeText (
   'text' text not null
 );
 
+
 create table users (
-    id primary key autoincrement,
+    id integer primary key autoincrement,
     username text not null unique,
     password text not null unique 
 );
