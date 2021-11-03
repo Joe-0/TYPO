@@ -1,4 +1,4 @@
-# Iteration Report / Plan 2
+# Iteration Report / Plan 3
 
 ## What each person was responsible for accomplishing.
 1. Assigned to Rahul: As a user, I want to view my past challenges (on a personalized dashboard, optional?)
