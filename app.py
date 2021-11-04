@@ -89,3 +89,12 @@ def login():
     password = db.execute('select password from users where username = ?',  request.form['username'])
     if werkzeug.security.check_password_hash(password, request.form['password']) == True:
         login; #?
+
+@app.route('/attempts')
+def fetchAttempts():
+    db = get_db()
+    cur = db.execute('select * from attempts where users == ? order by id', request.form['user'])
+    attempts = cur.fetchall()
+
+    #make render template will redirect to an html page that will show the attempts
+    #return render_template('show_entries.html', entries=entries, distinct=distinct)
