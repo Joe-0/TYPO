@@ -16,7 +16,8 @@
     <title>Typo ¿</title>
 </head>
 
-<body>
+<body class = "bg-dark text-light">
+
 
 
 <div class="pb-3 pt-3">
@@ -49,12 +50,79 @@
             </div>
 
 
+
+<div class = "container w-100" id = "testText" >
+    <div class = row>
+        <div class = "col"></div>
+        <div class = "col">
+            <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
         </div>
+        <div class = "col"></div>
+    </div>
+    <div class = "row align-items-center">
+        <div class = "col">
+            <p>TYPO</p>
+        </div>
+        <div class = "col-8">
+            <textarea class="bg-dark text-light text-input rounded w-100 pt-3 pb-5" style = "border: none; outline: none; caret-color: darkmagenta;" placeholder = "To begin, start typing..."id="textInput" autofocus></textarea>
+        </div>
+        <div class = "col">
+            <p>TEST</p>
+
+        </div>
+    </div>
+    <div class = "row mt-5">
+        <div class="col"></div>
+        <div class = "col align-self-center">
+            <button onclick="timePassed()" class = "btn btn-light">Submit</button>
+        </div>
+        <div class="col"></div>
     </div>
 
 </div>
 
+
 <script type="text/javascript" src="{{ url_for('static', filename='typo.js') }}"></script>
+
+
+
+
+<script type="text/javascript">
+    const textDisplayElement = document.getElementById('textDisplay')
+    const testInputElement = document.getElementById('textInput')
+    const timeElapsedElement = document.getElementById('timeElapsed')
+
+    testInputElement.addEventListener('input',timePassed)
+
+
+
+    let startTime
+    function timePassed() {
+        timeElapsedElement.innerText = 0
+        startTime = new Date()
+        setInterval(() => {
+            timeElapsedElement.innerText = getTimerTime()
+        }, 1000)
+        getEndTime()
+        testInputElement.removeEventListener('input',timePassed)
+    }
+
+    function getTimerTime() {
+        return Math.floor((new Date() - startTime) / 1000)
+    }
+    let endTime
+    function getEndTime(){
+        endTime = Math.floor((new Date() - startTime) / 1000)
+       console.log(getTimerTime())
+    }
+
+
+</script>
+
+
+
+    <script src="typo.js"></script>
+
 
 </body>
 </html>
