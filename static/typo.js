@@ -1,9 +1,9 @@
 /*
  This javascript file contains code adapted from https://github.com/WebDevSimplified/JS-Speed-Typing-Game
  written by WebDevSimplified
- */
+*/
 
-// mkae variable holding required html elements
+// make variable holding required html elements
 const textDisplayElement = document.getElementById('textDisplay')
 const textInputElement = document.getElementById('textInput')
 const timeElapsedElement = document.getElementById('timeElapsed')

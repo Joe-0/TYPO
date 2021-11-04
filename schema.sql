@@ -9,7 +9,8 @@ drop table if exists users;
 create table users (
     id integer primary key autoincrement,
     username text not null unique,
-    password text not null unique 
+    password text not null unique,
+    isAdmin boolean not null
 );
 
 drop table if exists attempts;
@@ -19,3 +20,5 @@ create table attempts (
     wpm integer not null,
     accuracy integer not null
 );
+
+
