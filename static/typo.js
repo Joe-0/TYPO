@@ -31,7 +31,11 @@ strt.split('').forEach(char => {
 
 })
 
-textInputElement.addEventListener('input', () => {
+function ready() {
+    textInputElement.addEventListener('input', text_color)
+}
+
+function text_color() {
     let correct = false
     strin_len = textInputElement.value.length
     if (count === 1) {
@@ -62,7 +66,7 @@ textInputElement.addEventListener('input', () => {
 
     })
 
-})
+}
 
 
 function timePassed() {
@@ -79,6 +83,7 @@ function starttimer() {
 
 function endchallenge() {
     clearInterval(Interval);
+    textInputElement.removeEventListener('input', text_color)
     let count_correct = 1
     let end_time = timeElapsedElement.innerText / 60
     let wpm = Math.floor(num_words / end_time)
@@ -93,10 +98,11 @@ function endchallenge() {
     })
     console.log(num_char, count_correct)
     let accuracy = (count_correct / num_char) * 100
-    accuracyElement.innerHTML = accuracy.toFixed(2)
+    accuracyElement.innerHTML = accuracy.toFixed(1)
 
 }
 
+document.addEventListener("DOMContentLoaded",ready)
 
 
 
