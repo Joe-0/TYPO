@@ -6,123 +6,134 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style/style.css">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-uWxY/CJNBR+1zjPWmfnSnVxwRheevXITnMqoEIeG1LJrdI0GlVs/9cVSyPYXdcSF" crossorigin="anonymous">
 
     <!-- <link rel="stylesheet" href="main.css"> do we need this? idk-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Open Sans' rel='stylesheet'>
 
     <title>Typo ¿</title>
+
 </head>
 
-<body class = "bg-dark text-light">
+<body style="background-image: url('/static/img/typobackground.PNG'); background-repeat: no-repeat; background-attachment: fixed;  background-size: 100% 100%; ">
 
 
+<div class="container">
 
-<div class="pb-3 pt-3">
-    <div class="mx-auto bg-light border border-dark " style="width: 700px">
-        <h1 class="text-dark ms-4">Typo ¿</h1>
-        <div class="px-4">
+    <nav class="navbar navbar-expand-md ">
+        <a class="navbar-brand" href="#"><img src="/static/img/typo%20logo.png" alt="..." height="100"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="navitm" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navitm" href="#">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navitm" href="#">LeaderBoard</a>
+                </li>
+            </ul>
 
-            <div class="float-end d-inline">Time Elapsed:
-                <div class="timeElapsed d-inline" id="timeElapsed">0</div>
-                <div class="d-inline">s</div>
+            <div class="navbar-collapse collapse justify-content-end">
+                <ul class="nav navbar-nav ">
+                    <li class="nav-item">
+                        <a class="navitm" href="#"><span class="fas fa-user"></span> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navitm" href="#"><span class="fas fa-sign-in-alt"></span> Login</a>
+                    </li>
+                </ul>
             </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class=" col-10">
+
+                    <div class=" row timer float-end d-inline">
+                        <div class="heading_text d-inline">Time Elapsed:</div>
+                        <div class="time timeElapsed d-inline" id="timeElapsed">0</div>
+                        <div class="time d-inline">s</div>
+                    </div>
+                    <br>
+
+                    <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
+
+                    <div class="row">
+                       <textarea class=" text-input form-control rounded w-100 pt-3 pb-5 bg-muted border-secondary"
+                                 rows="4"
+                                 id="textInput" autofocus placeholder="Begin typing when ready"></textarea>
+                    </div>
+                    <div class="'row float-end">
+                        <form action="{{ url_for('show_index') }}" method="get">
+                            <div class="row pe-3 pt-2">
+                                <button class="btn btn-primary" type="submit">Restart</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+
+            </div>
+
             <br>
-            <div class="text-display font-weight-bold text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
-            <textarea class="text-input rounded w-100 pt-3 pb-5 bg-muted" id="textInput" autofocus
-                      placeholder="Begin typing when ready"></textarea>
 
-            <div class="text-center pt-5 pb-5">
-                <div class=" d-inline pb-3 pt-4"> Words Per Minute:
-                    <div class="WPM d-inline" id="WPM">-</div>
-                </div>
-                <br>
-                <div class="d-inline pb-4 pt-2">Characters Per Minute:
-                    <div class="CPM d-inline" id="CPM">-</div>
-                </div>
-                <br>
-                <div class="d-inline pb-4 pt-2">Accuracy:
-                    <div class="accuracy d-inline" id="accuracy">-</div>
-                    <div class="d-inline">%</div>
+
+            <div class="row  justify-content-center">
+                <div class="col-6">
+                    <div class="row justify-content-center">
+                        <div class="col text-center ">
+                            <div class="heading_text row justify-content-center">
+                                WPM
+                            </div>
+                            <div id="WPM" class="pink row justify-content-center">
+                                -
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <div class="heading_text row justify-content-center">
+                                CPM
+                            </div>
+                            <div id="CPM" class="pink row justify-content-center">
+                                -
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <div class="heading_text row justify-content-center">
+                                Accuracy
+                            </div>
+                            <div class="d-inline row justify-content-center">
+                                <div id="accuracy" class="pink d-inline text-center ">
+                                    -
+                                </div>
+                                <div class="d-inline" style="font-size:30px;color: #FA008F;font-family: 'Open Sans';">%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
+        </div>
 
 
-<div class = "container w-100" id = "testText" >
-    <div class = row>
-        <div class = "col"></div>
-        <div class = "col">
-            <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
-        </div>
-        <div class = "col"></div>
-    </div>
-    <div class = "row align-items-center">
-        <div class = "col">
-            <p>TYPO</p>
-        </div>
-        <div class = "col-8">
-            <textarea class="bg-dark text-light text-input rounded w-100 pt-3 pb-5" style = "border: none; outline: none; caret-color: darkmagenta;" placeholder = "To begin, start typing..."id="textInput" autofocus></textarea>
-        </div>
-        <div class = "col">
-            <p>TEST</p>
-
-        </div>
-    </div>
-    <div class = "row mt-5">
-        <div class="col"></div>
-        <div class = "col align-self-center">
-            <button onclick="timePassed()" class = "btn btn-light">Submit</button>
-        </div>
-        <div class="col"></div>
     </div>
 
-</div>
-
-
-<script type="text/javascript" src="{{ url_for('static', filename='typo.js') }}"></script>
-
-
-
-
-<script type="text/javascript">
-    const textDisplayElement = document.getElementById('textDisplay')
-    const testInputElement = document.getElementById('textInput')
-    const timeElapsedElement = document.getElementById('timeElapsed')
-
-    testInputElement.addEventListener('input',timePassed)
-
-
-
-    let startTime
-    function timePassed() {
-        timeElapsedElement.innerText = 0
-        startTime = new Date()
-        setInterval(() => {
-            timeElapsedElement.innerText = getTimerTime()
-        }, 1000)
-        getEndTime()
-        testInputElement.removeEventListener('input',timePassed)
-    }
-
-    function getTimerTime() {
-        return Math.floor((new Date() - startTime) / 1000)
-    }
-    let endTime
-    function getEndTime(){
-        endTime = Math.floor((new Date() - startTime) / 1000)
-       console.log(getTimerTime())
-    }
-
-
-</script>
-
-
-
-    <script src="typo.js"></script>
-
+    <script type="text/javascript" src="{{ url_for('static', filename='typo.js') }}"></script>
 
 </body>
 </html>

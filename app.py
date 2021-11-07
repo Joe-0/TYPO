@@ -56,13 +56,13 @@ def get_db():
 
 @app.route('/')
 def show_index():
-    random_id = random.randint(1, 9)
+    #random_id = random.randint(1, 4)
     db = get_db()
     ##IMPORTANT, THE BOTTOM "id = 1" IS ONLY A TEMPORARY MEASURE CHANGE IT TO RANDOM ID
     # WHEN WE ACTUALLY HAVE TEXT"
-    cur = db.execute('SELECT text FROM challengeText WHERE id=1')
+
+    cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
     texts = cur.fetchone()
-    print(texts)
     return render_template('index.html', texts=texts)
 
 @app.teardown_appcontext

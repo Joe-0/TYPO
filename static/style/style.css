@@ -1,0 +1,72 @@
+.correct {
+    color: white;
+    font-weight: bold;
+}
+.navitm{
+    background: #434343;
+    color: #7E7E7E;
+    padding: 8px;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.navitm:hover{
+    color: #FA008F;
+}
+
+.incorrect {
+    color: #FA008F;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.navbar {
+    background: #434343;
+    color: #7E7E7E;
+    font-size: 25px;
+}
+
+#results {
+    position: absolute;
+    width: 700px;
+    heigth: 160px;
+    right: 150px;
+    top: 800px;
+}
+
+#textDisplay {
+    font-family: 'Raleway';
+    color: #7C7C7C;
+    font-size: 22px;
+
+}
+
+
+#textInput {
+    font-size: 20px;
+}
+
+.heading_text {
+    color: #7E7E7E;
+    font-size: 18px;
+}
+
+.time {
+    color: #FA008F;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.pink {
+    color: #FA008F;
+    font-size: 65px;
+    fony-family: 'Open Sans';
+}
+
+
+::placeholder {
+    color: #7C7C7C;
+    font-size: 20px;
+
+}
+
