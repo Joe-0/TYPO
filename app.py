@@ -77,10 +77,12 @@ def register():
     db = get_db()
     ##the following code will enter a new username and a hashed version of a new password into users.
     #note that this function does not check for repeats of the same username
-    db.execute('insert into users (username, password) values (?, ?, ?)',
+    cur = db.execute('insert into users (username, password) values (?, ?, ?)',
                [request.form['username'],
                 werkzeug.security.generate_password_hash(request.form['password'], method='pbkdf2:sha256',
                                                          salt_length=16)])
+    texts = cur.fetchone()
+    return render_template('register.html', texts=texts)
 
 #This function logs a user given a username and password. Not quite sure which website to redirect to.
 @app.route('/login')
@@ -89,6 +91,7 @@ def login():
     password = db.execute('select password from users where username = ?',  request.form['username'])
     if werkzeug.security.check_password_hash(password, request.form['password']) == True:
         login; #?
+    return render_template('login.html')
 
 @app.route('/attempts')
 def fetchAttempts():
