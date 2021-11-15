@@ -1,16 +1,13 @@
 """
-https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
+    https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
     Flaskr
     ~~~~~~
 
-    A microblog example application written as Flask tutorial with
-    Flask and sqlite3.
+    This file uses code adapted from the flaskr flask tutorial which is a micro blog application written as Flask tutorial with flask and sqlite3
 
-    :copyright: (c) 2015 by Armin Ronacher.
-    :license: BSD, see LICENSE for more details.
 """
 
-import os, random, werkzeug
+import os, werkzeug
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash
 
@@ -97,7 +94,7 @@ def login():
     if werkzeug.security.check_password_hash(password, request.form['password']) == False:
         flash('incorrect password')
     return render_template('login.html')
-
+  
 @app.route('/attempts')
 def fetchAttempts():
     db = get_db()
@@ -107,9 +104,28 @@ def fetchAttempts():
     #make render template will redirect to an html page that will show the attempts
     #return render_template('show_entries.html', entries=entries, distinct=distinct)
 
+
+@app.route('/leaderboard')
+def leaderBoard():
+    return render_template('leaderboard.html')
+
+@app.route('/add_challenge_text')
+def add_text():
+    return render_template('addtext.html')
+
+@app.route('/submit_challenge_text', methods=['POST'])
+def submit_text():
+    db = get_db()
+    db.execute('INSERT INTO challengeText (title,text) VALUES("challengetext",?)',
+               [request.form['text']])
+    db.commit()
+    flash('Challenge text added successfully')
+    return redirect(url_for('add_text'))
+
 @app.route('/logout')
 def logout():
 
     #logout code here
 
     return render_template('login.html')
+

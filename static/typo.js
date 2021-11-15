@@ -1,6 +1,7 @@
 /*
  This javascript file contains code adapted from https://github.com/WebDevSimplified/JS-Speed-Typing-Game
  written by WebDevSimplified
+ Code from this source was used in changing the color and styling of the challenge text as users input text into the input box.
 */
 
 // make variable holding required html elements
@@ -8,7 +9,7 @@ const textDisplayElement = document.getElementById('textDisplay')
 const textInputElement = document.getElementById('textInput')
 const timeElapsedElement = document.getElementById('timeElapsed')
 const WPMelement = document.getElementById('WPM')
-const CPMelement = document.getElementById(('CPM'))
+const AWPMelement = document.getElementById(('AWPM'))
 const accuracyElement = document.getElementById('accuracy')
 
 // get the number of words and character in the challenge text
@@ -87,19 +88,17 @@ function endchallenge() {
     let count_correct = 1
     let end_time = timeElapsedElement.innerText / 60
     let wpm = Math.floor(num_words / end_time)
-    let cpm = Math.floor(num_char / end_time)
     WPMelement.innerHTML = wpm
-    CPMelement.innerHTML = cpm
     const arr_text = textDisplayElement.querySelectorAll('span')
     arr_text.forEach((charSpan, index) => {
         if (charSpan.classList.contains('correct')) {
             count_correct++
         }
     })
-    console.log(num_char, count_correct)
     let accuracy = (count_correct / num_char) * 100
     accuracyElement.innerHTML = accuracy.toFixed(1)
-
+    let accurate_WPM = (wpm * accuracy)/100
+    AWPMelement.innerHTML = accurate_WPM.toFixed(0)
 }
 
 document.addEventListener("DOMContentLoaded",ready)

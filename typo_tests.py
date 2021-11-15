@@ -64,3 +64,20 @@ class FlaskrTestCase(unittest.TestCase):
 
         rv = logout(client)
         assert b'You were logged out' in rv.data
+
+
+    def test_leaderboard(self):
+        rv = self.app.get('/leaderboard')
+        assert b'Rankings' in rv.data
+        assert b'Username' in rv.data
+        assert b'Highest Accurate WPM' in rv.data
+
+    def test_add_text(self):
+        rv = self.app.get('/add_challenge_text')
+        assert b'Add New challenge Text' in rv.data
+        assert b'Type challenge text here' in rv.data
+
+
+
+
+

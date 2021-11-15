@@ -47,7 +47,7 @@
                     </li>
                     <!-- This is just for testing the add challenge text functionality since login doesn't work yet -->
                     <li class="nav-item">
-                        <a class="navitm " href="{{ url_for('add_text') }}">Admin(add text)</a>
+                        <a class="navitm" href="{{ url_for('add_text') }}">Admin(add text)</a>
                     </li>
                 </ul>
 
@@ -68,96 +68,54 @@
         </div>
     </nav>
 
-    <div class="container">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class=" col-10">
+    <div class="d-flex justify-content-center">
+        <h1 class="display-3 font-weight-bold" style="color: #FFDDEA" >Rankings</h1>
+    </div>
 
-                    <div class=" row timer float-end d-inline">
-                        <div class="heading_text d-inline">Time Elapsed:</div>
-                        <div class="time timeElapsed d-inline" id="timeElapsed">0</div>
-                        <div class="time d-inline">s</div>
-                    </div>
-                    <br>
+    <div class="row justify-content-center ">
+        <div class="col-10">
+            <table class="table table-striped table-dark table-bordered table-hover table-md">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Highest Accurate WPM</th>
 
-                    <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><p class="h3"><img class="px-3 " src="/static/img/crown.png" alt="Typo Logo"
+                                                       height="25">1</p></th>
+                    <td><p class="h2">Ali</p></td>
+                    <td><p class="h2 float-end">45</p></td>
 
-                    <div class="row">
-                       <textarea onpaste="return false"
-                                 class=" text-input form-control rounded w-100 pt-3 pb-5 bg-muted border-secondary"
-                                 rows="4"
-                                 id="textInput" autofocus placeholder="Begin typing when ready"></textarea>
-                    </div>
-                    <div class="'row float-end">
-                        <form action="{{ url_for('show_index') }}" method="get">
-                            <div class="row pe-3 pt-2">
-                                <button class="btn btn-primary" type="submit">Restart</button>
-                            </div>
-                        </form>
-                    </div>
+                </tr>
+                <tr>
+                    <th scope="row"><p class="h3">2</p></th>
+                    <td><p class="h3">Rahul</p></td>
+                    <td><p class="h3 float-end">40</p></td>
 
-                </div>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Joe</td>
+                    <td><p class="float-end ">35</p></td>
 
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Zay</td>
+                    <td><p class="float-end ">1</p></td>
 
-            </div>
-
-            <br>
-
-
-            <div class="row  justify-content-center">
-                <div class="col-7">
-                    <div class="row justify-content-center">
-                        <div class="col text-center  ">
-                            <div class="heading_text row justify-content-center">
-                                WPM
-                            </div>
-                            <div id="WPM" class="pink row justify-content-center">
-                                -
-                            </div>
-                        </div>
-                        <div class="col text-center ">
-                            <div class="heading no-gutters row justify-content-center">
-                                a
-                            </div>
-                            <div class="mult row no-gutters justify-content-center">
-                                X
-                            </div>
-                        </div>
-                        <div class="col-4 text-center ">
-                            <div class="heading_text row justify-content-center">
-                                Accuracy
-                            </div>
-                            <div class="d-inline row justify-content-center">
-                                <div id="accuracy" class="pink d-inline text-center ">
-                                    -
-                                </div>
-                                <div class="d-inline px-0 mx-0" style="font-size:30px;color: #FA008F;font-family: 'Open Sans';">%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col text-center ">
-                            <div class="heading no-gutters row justify-content-center">
-                                a
-                            </div>
-                            <div class="mult row no-gutters justify-content-center">
-                                =
-                            </div>
-                        </div>
-                        <div class="col text-center px-0 mx-1 ">
-                            <div class="heading_text row justify-content-center">
-                                Accurate WPM
-                            </div>
-                            <div id="AWPM" class="pink row justify-content-center">
-                                -
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-
+                </tr>
+                </tbody>
+            </table>
         </div>
+    </div>
 
+
+    <div class="container">
         <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -236,11 +194,10 @@
     </div>
 </div>
 
-
-<script type="text/javascript" src="{{ url_for('static', filename='typo.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
         integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
         crossorigin="anonymous"></script>
+
 
 </body>
 </html>
