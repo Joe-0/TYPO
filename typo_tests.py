@@ -37,4 +37,11 @@ class FlaskrTestCase(unittest.TestCase):
         assert b'Username' in rv.data
         assert b'Highest Accurate WPM' in rv.data
 
+    def test_add_text(self):
+        rv = self.app.get('/add_challenge_text')
+        assert b'Add New challenge Text' in rv.data
+        assert b'Type challenge text here' in rv.data
+
+
+
 
