@@ -14,6 +14,12 @@
     color: #FA008F;
 }
 
+.mult{
+    color: #7E7E7E;
+    font-size: 65px;
+    fony-family: 'Open Sans';
+}
+
 .incorrect {
     color: #FA008F;
     font-weight: bold;
