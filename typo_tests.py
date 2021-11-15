@@ -31,3 +31,10 @@ class FlaskrTestCase(unittest.TestCase):
         rv = self.app.get('/')
         assert b'Begin typing when ready' in rv.data
 
+    def test_leaderboard(self):
+        rv = self.app.get('/leaderboard')
+        assert b'Rankings' in rv.data
+        assert b'Username' in rv.data
+        assert b'Highest Accurate WPM' in rv.data
+
+
