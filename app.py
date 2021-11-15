@@ -74,7 +74,7 @@ def register():
     db = get_db()
     ##the following code will enter a new username and a hashed version of a new password into users.
     #note that this function does not check for repeats of the same username
-    cur = db.execute('insert into users (username, password) values (?, ?, ?)',
+    cur = db.execute('insert into users (username, password) values (?, ?)',
                [request.form['username'],
                 werkzeug.security.generate_password_hash(request.form['password'], method='pbkdf2:sha256',
                                                          salt_length=16)])
@@ -85,11 +85,16 @@ def register():
 @app.route('/login')
 def login():
     db = get_db()
-    '''password = db.execute('select password from users where username = ?',  request.form['username'])
+    password = db.execute('select password from users where username = ?',  request.form['username'])
     if werkzeug.security.check_password_hash(password, request.form['password']) == True:
-        login; #?'''
-    return render_template('login.html')
+        #login; #?
+        flash('login successful')
 
+    #case where the password(or username) was wrong
+    if werkzeug.security.check_password_hash(password, request.form['password']) == False:
+        flash('incorrect password')
+    return render_template('login.html')
+  
 @app.route('/attempts')
 def fetchAttempts():
     db = get_db()
@@ -98,6 +103,7 @@ def fetchAttempts():
 
     #make render template will redirect to an html page that will show the attempts
     #return render_template('show_entries.html', entries=entries, distinct=distinct)
+
 
 @app.route('/leaderboard')
 def leaderBoard():
@@ -115,3 +121,11 @@ def submit_text():
     db.commit()
     flash('Challenge text added successfully')
     return redirect(url_for('add_text'))
+
+@app.route('/logout')
+def logout():
+
+    #logout code here
+
+    return render_template('login.html')
+

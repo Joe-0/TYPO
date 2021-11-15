@@ -14,6 +14,17 @@ import app as flaskr
 import unittest
 import tempfile
 
+
+def login(client, username, password):
+    return client.post('/login', data=dict(
+        username=username,
+        password=password
+    ), follow_redirects=True)
+
+
+def logout(client):
+    return client.get('/logout', follow_redirects=True)
+
 class FlaskrTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -54,6 +65,7 @@ class FlaskrTestCase(unittest.TestCase):
         rv = logout(client)
         assert b'You were logged out' in rv.data
 
+
     def test_leaderboard(self):
         rv = self.app.get('/leaderboard')
         assert b'Rankings' in rv.data
@@ -64,6 +76,7 @@ class FlaskrTestCase(unittest.TestCase):
         rv = self.app.get('/add_challenge_text')
         assert b'Add New challenge Text' in rv.data
         assert b'Type challenge text here' in rv.data
+
 
 
 
