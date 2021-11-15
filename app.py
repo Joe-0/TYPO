@@ -12,7 +12,7 @@ https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
 
 import os, random, werkzeug
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory
+from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash
 
 
 app = Flask(__name__)
@@ -77,7 +77,7 @@ def register():
     db = get_db()
     ##the following code will enter a new username and a hashed version of a new password into users.
     #note that this function does not check for repeats of the same username
-    cur = db.execute('insert into users (username, password) values (?, ?, ?)',
+    cur = db.execute('insert into users (username, password) values (?, ?)',
                [request.form['username'],
                 werkzeug.security.generate_password_hash(request.form['password'], method='pbkdf2:sha256',
                                                          salt_length=16)])
@@ -90,7 +90,12 @@ def login():
     db = get_db()
     password = db.execute('select password from users where username = ?',  request.form['username'])
     if werkzeug.security.check_password_hash(password, request.form['password']) == True:
-        login; #?
+        #login; #?
+        flash('login successful')
+
+    #case where the password(or username) was wrong
+    if werkzeug.security.check_password_hash(password, request.form['password']) == False:
+        flash('incorrect password')
     return render_template('login.html')
 
 @app.route('/attempts')
@@ -101,3 +106,10 @@ def fetchAttempts():
 
     #make render template will redirect to an html page that will show the attempts
     #return render_template('show_entries.html', entries=entries, distinct=distinct)
+
+@app.route('/logout')
+def logout():
+
+    #logout code here
+
+    return render_template('login.html')
