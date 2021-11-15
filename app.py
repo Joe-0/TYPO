@@ -7,7 +7,7 @@
 
 """
 
-import os, random, werkzeug
+import os, werkzeug
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory
 
@@ -98,3 +98,7 @@ def fetchAttempts():
 
     #make render template will redirect to an html page that will show the attempts
     #return render_template('show_entries.html', entries=entries, distinct=distinct)
+
+@app.route('/leaderboard')
+def leaderBoard():
+    return render_template('leaderboard.html')
