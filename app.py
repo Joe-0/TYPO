@@ -9,7 +9,7 @@
 
 import os, werkzeug
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory
+from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash
 
 
 app = Flask(__name__)
@@ -102,3 +102,16 @@ def fetchAttempts():
 @app.route('/leaderboard')
 def leaderBoard():
     return render_template('leaderboard.html')
+
+@app.route('/add_challenge_text')
+def add_text():
+    return render_template('addtext.html')
+
+@app.route('/submit_challenge_text', methods=['POST'])
+def submit_text():
+    db = get_db()
+    db.execute('INSERT INTO challengeText (title,text) VALUES("challengetext",?)',
+               [request.form['text']])
+    db.commit()
+    flash('Challenge text added successfully')
+    return redirect(url_for('add_text'))
