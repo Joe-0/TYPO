@@ -31,6 +31,29 @@ class FlaskrTestCase(unittest.TestCase):
         rv = self.app.get('/')
         assert b'Begin typing when ready' in rv.data
 
+    def test_register(self):
+        rv = self.app.post('/register', data=dict(
+            username='Yo',
+            password='not'
+        ), follow_redirects=True)
+
+        assert b'Yo' in rv.data
+        assert b'not' in rv.data
+
+    def test_login_logout(client):
+        """Make sure login works."""
+        username = flaskr.app.config["USERNAME"]
+        password = flaskr.app.config["PASSWORD"]
+
+        rv = login(client, username, password)
+        assert b'You were logged in' in rv.data
+
+        rv = login(client, username, f'{password}x')
+        assert b'Invalid password' in rv.data
+
+        rv = logout(client)
+        assert b'You were logged out' in rv.data
+
     def test_leaderboard(self):
         rv = self.app.get('/leaderboard')
         assert b'Rankings' in rv.data
