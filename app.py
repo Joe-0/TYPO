@@ -1,13 +1,10 @@
 """
-https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
+    https://sun.iwu.edu/~mliffito/flask_tutorial/index.html
     Flaskr
     ~~~~~~
 
-    A microblog example application written as Flask tutorial with
-    Flask and sqlite3.
+    This file uses code adapted from the flaskr flask tutorial which is a micro blog application written as Flask tutorial with flask and sqlite3
 
-    :copyright: (c) 2015 by Armin Ronacher.
-    :license: BSD, see LICENSE for more details.
 """
 
 import os, random, werkzeug
@@ -88,9 +85,9 @@ def register():
 @app.route('/login')
 def login():
     db = get_db()
-    password = db.execute('select password from users where username = ?',  request.form['username'])
+    '''password = db.execute('select password from users where username = ?',  request.form['username'])
     if werkzeug.security.check_password_hash(password, request.form['password']) == True:
-        login; #?
+        login; #?'''
     return render_template('login.html')
 
 @app.route('/attempts')
