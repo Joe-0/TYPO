@@ -5,16 +5,15 @@ create table challengeText (
   'text' text not null
 );
 
-drop table if exists users;
-create table users (
+
+CREATE TABLE IF NOT EXISTS users (
     id integer primary key autoincrement,
     username text not null unique,
     password text not null unique,
-    isAdmin boolean not null
+    isAdmin boolean
 );
 
-drop table if exists attempts;
-create table attempts (
+CREATE TABLE IF NOT EXISTS attempts (
     id integer primary key autoincrement,
     user text not null references users(username),
     wpm integer not null,
