@@ -9,7 +9,7 @@
 
 import os, werkzeug
 from sqlite3 import dbapi2 as sqlite3
-from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash
+from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash, session
 
 app = Flask(__name__)
 
@@ -86,17 +86,25 @@ def register():
 
 
 # This function logs a user given a username and password. Not quite sure which website to redirect to.
-@app.route('/login', methods=['POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
+    print('in function')
+    error = None
     db = get_db()
+    print('open DB')
     password = db.execute('select password from users where username = ?', request.form['login_username'])
-    if werkzeug.security.check_password_hash(password, request.form['login_password']) == True:
-        flash('login successful')
-        return redirect(url_for('show_index'))
+    print('got password')
+    print(f"password: {password}")
+    if request.method == 'POST':
+        if werkzeug.security.check_password_hash(password, request.form['login_password']) == True:
+            session['logged_in'] = True
+            flash('You were logged in')
+            return redirect(url_for('show_index'))
 
-    # case where the password(or username) was wrong
-    elif werkzeug.security.check_password_hash(password, request.form['login_password']) == False:
-        flash('incorrect password')
+        # case where the password(or username) was wrong
+        elif werkzeug.security.check_password_hash(password, request.form['login_password']) == False:
+            error = 'Invalid username or password'
+    return render_template('index.html', error=error)
 
 
 
