@@ -168,15 +168,13 @@
                     <div class="modal-body">
                         <form action="{{ url_for('login') }}" method="post">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">User name</label>
-                                <input name ="login_username" type="email" class="form-control" id="exampleInputEmail1"
+                                <label for="loginUsername" class="form-label">User name</label>
+                                <input name ="login_username" type="username" class="form-control" id="loginUsername"
                                        aria-describedby="emailHelp">
-                                <div id="emailHelp" class="form-text">
-                                </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input name="login_password" type="password" class="form-control" id="exampleInputPassword1">
+                                <label for="loginPassword" class="form-label">Password</label>
+                                <input name="login_password" type="password" class="form-control" id="loginPassword">
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary float-end">Sign In</button>
@@ -204,15 +202,15 @@
                     <div class="modal-body">
                         <form action="{{ url_for('register')}}" method="post">
                             <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">User name</label>
-                                <input name="register_username" type="email" class="form-control" id="exampleInputEmail1"
+                                <label for="registerUsername" class="form-label">User name</label>
+                                <input name="register_username" type="username" class="form-control" id="registerUsername"
                                        aria-describedby="emailHelp">
                                 <div id="emailHelp" class="form-text">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input name="register_password" type="password" class="form-control" id="exampleInputPassword1">
+                                <label for="registerPassword" class="form-label">Password</label>
+                                <input name="register_password" type="password" class="form-control" id="registerPassword">
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary float-end">Sign Up</button>
