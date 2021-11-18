@@ -135,6 +135,9 @@ def fetchAttempts():
 def leaderBoard():
     return render_template('leaderboard.html')
 
+@app.route('/profile')
+def profile():
+    return render_template('profile.html')
 
 @app.route('/add_challenge_text')
 def add_text():

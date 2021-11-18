@@ -11,7 +11,7 @@ const timeElapsedElement = document.getElementById('timeElapsed')
 const WPMelement = document.getElementById('WPM')
 const AWPMelement = document.getElementById(('AWPM'))
 const accuracyElement = document.getElementById('accuracy')
-
+const alertElement = document.getElementById('alert_box')
 // get the number of words and character in the challenge text
 const num_words = textDisplayElement.innerText.split(' ').length
 const num_char = textDisplayElement.innerText.length
@@ -84,7 +84,9 @@ function starttimer() {
 
 function endchallenge() {
     clearInterval(Interval);
+    alertElement.innerHTML = "Typing Test Comlpeted! If you wish to test again, then click the restart button"
     textInputElement.removeEventListener('input', text_color)
+    textInputElement.disabled = true
     let count_correct = 1
     let end_time = timeElapsedElement.innerText / 60
     let wpm = Math.floor(num_words / end_time)
@@ -99,6 +101,7 @@ function endchallenge() {
     accuracyElement.innerHTML = accuracy.toFixed(1)
     let accurate_WPM = (wpm * accuracy)/100
     AWPMelement.innerHTML = accurate_WPM.toFixed(0)
+
 }
 
 document.addEventListener("DOMContentLoaded",ready)
