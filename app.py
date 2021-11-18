@@ -7,7 +7,7 @@
 
 """
 
-import os, werkzeug
+import os, random, werkzeug, csv
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash, session
 
@@ -36,10 +36,23 @@ def init_db():
     db.commit()
 
 
+def seed():
+    with app.open_resource('challenge_one.csv', mode='r') as chal:
+        dr = csv.DictReader(chal)
+        challenge_one = [(i['id'], i['title'], i['text']) for i in dr]
+
+    db = get_db()
+
+    db.executemany("insert into challengeText (id, title, text) VALUES (?, ?, ?);", challenge_one)
+
+    db.commit()
+
+
 @app.cli.command('initdb')
 def initdb_command():
     """Creates the database tables."""
     init_db()
+    seed()
     print('Initialized the database.')
 
 
