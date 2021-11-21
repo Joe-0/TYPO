@@ -12,6 +12,7 @@ const WPMelement = document.getElementById('WPM')
 const AWPMelement = document.getElementById(('AWPM'))
 const accuracyElement = document.getElementById('accuracy')
 const alertElement = document.getElementById('alert_box')
+const timeElement = document.getElementById('timetrack')
 // get the number of words and character in the challenge text
 const num_words = textDisplayElement.innerText.split(' ').length
 const num_char = textDisplayElement.innerText.length
@@ -73,12 +74,11 @@ function text_color() {
 function timePassed() {
     timeElapsedElement.innerText = 0
     time++
-    timeElapsedElement.innerText = time
-
+    timeElapsedElement.innerText = (time/100).toFixed(2)
 }
 
 function starttimer() {
-    Interval = setInterval(timePassed, 1000)
+    Interval = setInterval(timePassed, 10)
 }
 
 
@@ -89,7 +89,7 @@ function endchallenge() {
     textInputElement.disabled = true
     let count_correct = 1
     let end_time = timeElapsedElement.innerText / 60
-    let wpm = Math.floor(num_words / end_time)
+    let wpm = (num_words / end_time).toFixed(2)
     WPMelement.innerHTML = wpm
     const arr_text = textDisplayElement.querySelectorAll('span')
     arr_text.forEach((charSpan, index) => {

@@ -2,15 +2,16 @@
 {% block body %}
 
         <div class="container-fluid">
-            <div class="row justify-content-center alert alert-dark" role="alert" id="alert_box">
+            <div class="row justify-content-center alert" role="alert" id="alert_box">
             </div>
             <div class="row justify-content-center">
                 <div class=" col-10">
 
                     <div class=" row timer float-end d-inline">
-                        <div class="heading_text d-inline">Time Elapsed:</div>
-                        <div class="time timeElapsed d-inline" id="timeElapsed">0</div>
-                        <div class="time d-inline">s</div>
+                        <div class=" heading_text d-inline position-static">Time Elapsed:</div>
+                        <div class=" time timeElapsed d-inline" id="timeElapsed">0</div>
+                        <div class=" time d-inline">s</div>
+
                     </div>
                     <br>
 
@@ -19,7 +20,7 @@
                     <div class="row">
                        <textarea onpaste="return false"
                                  class=" text-input form-control rounded w-100 pt-3 pb-5 bg-muted border-secondary"
-                                 rows="4"
+                                 rows="3"
                                  id="textInput" autofocus placeholder="Begin typing when ready"></textarea>
                     </div>
                     <div class="'row float-end">
@@ -39,7 +40,7 @@
 
 
             <div class="row  justify-content-center">
-                <div class="col-7">
+                <div class="col-9">
                     <div class="row justify-content-center">
                         <div class="col text-center  ">
                             <div class="heading_text row justify-content-center">

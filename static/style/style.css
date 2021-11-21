@@ -9,6 +9,10 @@
     font-size: 25px;
     text-decoration: none;
 }
+#alert_box{
+    background: #434343;
+    color: #ffc107;
+}
 
 .navitm:hover{
     color: #FA008F;
