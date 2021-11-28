@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
 
-    <div class="row msg justify-content-center alert alert-dismissible fade show" role="alert">{{ msg }}</div>
+    <div class="row msg justify-content-center alert alert-dismissible fade show" role="alert"
+         id="alert_box">{{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
 
     <div class="mask d-flex align-items-center h-100 gradient-custom-3">
         <div class="container h-100">
@@ -9,12 +13,12 @@
                 <div class="col-12 col-md-9 col-lg-7 col-xl-6">
                     <div class="card" style="border-radius: 15px;">
                         <div class="card-body p-5">
-                            <h2 class="text-uppercase text-center mb-5">Sign up for Typo ¿ !</h2>
+                            <h2 class="text-uppercase text-center mb-5">Sign up for Typo !</h2>
 
                             <form action="{{ url_for('register') }}" method="post">
 
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">User name</label>
+                                    <label for="username" class="form-label">Username</label>
                                     <input name="username" type="text" class="form-control" id="username"
                                            aria-describedby="emailHelp">
                                     <div id="emailHelp" class="form-text">

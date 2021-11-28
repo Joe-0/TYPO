@@ -5,6 +5,8 @@
 
     This file uses code adapted from the flaskr flask tutorial which is a micro blog application written as Flask tutorial with flask and sqlite3
 
+    Register, login and logout functions are adapted from a tutorial article from geeks for geeks written bt venniladeenan
+    URL : https://www.geeksforgeeks.org/login-and-registration-project-using-flask-and-mysql/
 """
 
 import os, random, werkzeug, csv
@@ -101,7 +103,7 @@ def register():
                                                                   method='pbkdf2:sha256',
                                                                   salt_length=16))])
             db.commit()
-            msg = ' You have successfully signed up. PLease Sign in to continue'
+            msg = 'You have successfully signed up. Please Sign in to continue'
     elif request.method == 'POST':
         msg = 'Please fill out the required fields!'
     return render_template('register.html', msg=msg)
@@ -125,18 +127,26 @@ def login():
                 session['logged_in'] = True
                 session['id'] = account['id']
                 session['username'] = account['username']
-                msg = 'Logged in successfully !'
+                msg = 'Signed in successfully !'
                 return render_template('index.html', msg=msg, texts=texts)
             else:
-                msg = 'Incorrect username / password ! '
+                msg = 'Incorrect username / password !'
+        elif not username or not password:
+            msg = 'Please fill out the required fields!'
+        else:
+            msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
 
 @app.route('/logout')
 def logout():
+    db = get_db()
+    cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
+    texts = cur.fetchone()
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
-    return redirect(url_for('show_index'))
+    msg = "Signed out successfully"
+    return render_template('index.html', msg=msg, texts=texts)
 
 @app.route('/attempts')
 def fetchAttempts():
