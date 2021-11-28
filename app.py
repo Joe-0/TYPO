@@ -35,7 +35,7 @@ def init_db():
     db = get_db()
     with app.open_resource('schema.sql', mode='r') as f:
         db.cursor().executescript(f.read())
-    db.execute('INSERT INTO users (username, password, isadmin) values (?, ?, ?)',['admin',(werkzeug.security.generate_password_hash('default',
+    db.execute('INSERT INTO users (username, password, isadmin) values (?, ?, ?)',['admin1',(werkzeug.security.generate_password_hash('default',
                                                                   method='pbkdf2:sha256',
                                                                   salt_length=16)), True])
     db.commit()
