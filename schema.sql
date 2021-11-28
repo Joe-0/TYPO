@@ -5,12 +5,12 @@ create table challengeText (
   'text' text not null
 );
 
-
+drop table if exists users;
 CREATE TABLE IF NOT EXISTS users (
     id integer primary key autoincrement,
     username text not null unique,
-    password text not null unique,
-    isAdmin boolean
+    password text not null ,
+    isAdmin boolean DEFAULT 0
 );
 
 

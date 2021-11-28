@@ -35,6 +35,9 @@ def init_db():
     db = get_db()
     with app.open_resource('schema.sql', mode='r') as f:
         db.cursor().executescript(f.read())
+    db.execute('INSERT INTO users (username, password, isadmin) values (?, ?, ?)',['admin',(werkzeug.security.generate_password_hash('default',
+                                                                  method='pbkdf2:sha256',
+                                                                  salt_length=16)), True])
     db.commit()
 
 
@@ -127,6 +130,7 @@ def login():
                 session['logged_in'] = True
                 session['id'] = account['id']
                 session['username'] = account['username']
+                session['isadmin'] = account['isadmin']
                 msg = 'Signed in successfully !'
                 return render_template('index.html', msg=msg, texts=texts)
             else:
@@ -145,6 +149,7 @@ def logout():
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
+    session.pop('isadmin',None)
     msg = "Signed out successfully"
     return render_template('index.html', msg=msg, texts=texts)
 
