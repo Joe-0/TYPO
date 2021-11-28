@@ -67,11 +67,7 @@ def get_db():
 
 @app.route('/')
 def show_index():
-    # random_id = random.randint(1, 4)
     db = get_db()
-    ##IMPORTANT, THE BOTTOM "id = 1" IS ONLY A TEMPORARY MEASURE CHANGE IT TO RANDOM ID
-    # WHEN WE ACTUALLY HAVE TEXT"
-
     cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
     texts = cur.fetchone()
     return render_template('index.html', texts=texts)
@@ -85,41 +81,62 @@ def close_db(error):
 
 
 # This function takes a username and password input and (hopefully) securely stores them into a users database
-@app.route('/register', methods=['POST'])
+@app.route('/register', methods=['GET', 'POST'])
 def register():
-    db = get_db()
-    ##the following code will enter a new username and a hashed version of a new password into users.
-    # note that this function does not check for repeats of the same username
-    db.execute('insert into users (username, password) values (?, ?)',
-               [request.form['register_username'],
-                (werkzeug.security.generate_password_hash(request.form['register_password'], method='pbkdf2:sha256',
-                                                          salt_length=16))])
-    db.commit()
-    return redirect(url_for('show_index'))
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        cur = db.execute('select * from users where username = ?', [username])
+        account = cur.fetchone()
+        if account:
+            msg = 'Username already exists! Please chooses a different username'
+        elif not username or not password:
+            msg = 'Please fill out the required fields!'
+        else:
+            db.execute('INSERT INTO users (username, password) values (?, ?)',
+                       [request.form['username'],
+                        (werkzeug.security.generate_password_hash(password,
+                                                                  method='pbkdf2:sha256',
+                                                                  salt_length=16))])
+            db.commit()
+            msg = ' You have successfully signed up. PLease Sign in to continue'
+    elif request.method == 'POST':
+        msg = 'Please fill out the required fields!'
+    return render_template('register.html', msg=msg)
 
 
 # This function logs a user given a username and password. Not quite sure which website to redirect to.
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    print('in function')
-    error = None
     db = get_db()
-    print('open DB')
-    password = db.execute('select password from users where username = ?', request.form['login_username'])
-    print('got password')
-    print(f"password: {password}")
-    if request.method == 'POST':
-        if werkzeug.security.check_password_hash(password, request.form['login_password']) == True:
-            session['logged_in'] = True
-            flash('You were logged in')
-            return redirect(url_for('show_index'))
+    cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
+    texts = cur.fetchone()
+    msg = ''
+    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+        username = request.form['username']
+        password = request.form['password']
+        cur = db.execute('Select * FROM users where username = ?', [username])
+        account = cur.fetchone()
+        if account:
+            pass_check = werkzeug.security.check_password_hash(account['password'], password)
+            if pass_check:
+                session['logged_in'] = True
+                session['id'] = account['id']
+                session['username'] = account['username']
+                msg = 'Logged in successfully !'
+                return render_template('index.html', msg=msg, texts=texts)
+            else:
+                msg = 'Incorrect username / password ! '
+    return render_template('login.html', msg=msg)
 
-        # case where the password(or username) was wrong
-        elif werkzeug.security.check_password_hash(password, request.form['login_password']) == False:
-            error = 'Invalid username or password'
-    return render_template('index.html', error=error)
-
-
+@app.route('/logout')
+def logout():
+    session.pop('logged_in', None)
+    session.pop('id', None)
+    session.pop('username', None)
+    return redirect(url_for('show_index'))
 
 @app.route('/attempts')
 def fetchAttempts():
@@ -131,13 +148,25 @@ def fetchAttempts():
     # return render_template('show_entries.html', entries=entries, distinct=distinct)
 
 
+@app.route('/loginpage')
+def loginpage():
+    return render_template('login.html')
+
+
+@app.route('/registerpage')
+def registerpage():
+    return render_template('register.html')
+
+
 @app.route('/leaderboard')
 def leaderBoard():
     return render_template('leaderboard.html')
 
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
+
 
 @app.route('/add_challenge_text')
 def add_text():
@@ -153,9 +182,3 @@ def submit_text():
     flash('Challenge text added successfully')
     return redirect(url_for('add_text'))
 
-
-@app.route('/logout')
-def logout():
-    # logout code here
-
-    return render_template('login.html')

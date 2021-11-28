@@ -28,7 +28,8 @@
 
     <nav class="navbar navbar-expand-lg navbar-light py-0 ">
         <div class="container-fluid">
-            <a class="navbar-brand py-0" href="#"><img src="/static/img/typo%20logo.png" alt="Typo Logo" height="100"></a>
+            <a class="navbar-brand py-0" href="#"><img src="/static/img/typo%20logo.png" alt="Typo Logo"
+                                                       height="100"></a>
             <button class="bg-warning navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -49,20 +50,23 @@
                     <li class="nav-item">
                         <a class="navitm " href="{{ url_for('add_text') }}">Admin(add text)</a>
                     </li>
-                </ul>
-
-
-                <ul class="nav navbar-nav ">
+                    {% if session.logged_in %}
                     <li class="nav-item">
-                        <a class="navitm" href="#SignUpModal" data-bs-toggle="modal"
-                           data-bs-target="#SignUpModal"><span class="fas fa-user"></span> Sign Up</a>
+                        <a class="navitm" href="{{ url_for('logout') }}"><span class="fas fa-sign-in-alt"></span> Sign out</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navitm " href="#loginModal" data-bs-toggle="modal"
-                           data-bs-target="#loginModal"><span class="fas fa-sign-in-alt"></span>
+                        <div class="navitm "><span class="fas fa-user"></span>
+                            {{ session.username}}</div>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="navitm" href="{{ url_for('registerpage') }}"><span class="fas fa-user"></span> Sign Up</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navitm " href="{{ url_for('loginpage') }}"><span class="fas fa-sign-in-alt"></span>
                             Sign In</a>
                     </li>
-                </ul>
+                {% endif %}
 
             </div>
         </div>
@@ -80,11 +84,10 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!--<form action="#" method="post|get" >-->
-                        <form>
+                        <form action="{{ url_for('login') }}" method="post">
                             <div class="mb-3">
                                 <label for="loginUsername" class="form-label">User name</label>
-                                <input name ="login_username" type="username" class="form-control" id="loginUsername"
+                                <input name="login_username" type="username" class="form-control" id="loginUsername"
                                        aria-describedby="emailHelp">
                             </div>
                             <div class="mb-3">
@@ -115,18 +118,17 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!--<form action="{{ url_for('register')}}" method="post">-->
-                        <form>
+                        <form action="{{ url_for('register')}}" method="post">
                             <div class="mb-3">
-                                <label for="registerUsername" class="form-label">User name</label>
-                                <input name="register_username" type="username" class="form-control" id="registerUsername"
+                                <label for="username" class="form-label">User name</label>
+                                <input name="username" type="username" class="form-control" id="username"
                                        aria-describedby="emailHelp">
                                 <div id="emailHelp" class="form-text">
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="registerPassword" class="form-label">Password</label>
-                                <input name="register_password" type="password" class="form-control" id="registerPassword">
+                                <label for="password" class="form-label">Password</label>
+                                <input name="password" type="password" class="form-control" id="password">
                             </div>
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary float-end">Sign Up</button>
@@ -136,9 +138,7 @@
                         </form>
                         <br>
                         <div class="float-start">
-                            Already have an account?<a data-bs-dismiss="modal" href="#loginModal"
-                                                       data-bs-toggle="modal"
-                                                       data-bs-target="#loginModal">Sign In</a>
+                            Already have an account?<a href="{{ url_for('loginpage') }}">Sign In</a>
                         </div>
                     </div>
 

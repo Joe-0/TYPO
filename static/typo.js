@@ -89,7 +89,7 @@ function endchallenge() {
     textInputElement.disabled = true
     let count_correct = 1
     let end_time = timeElapsedElement.innerText / 60
-    let wpm = (num_words / end_time).toFixed(2)
+    let wpm = (num_words / end_time).toFixed(0)
     WPMelement.innerHTML = wpm
     const arr_text = textDisplayElement.querySelectorAll('span')
     arr_text.forEach((charSpan, index) => {

@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS users (
     isAdmin boolean
 );
 
+
 CREATE TABLE IF NOT EXISTS attempts (
     id integer primary key autoincrement,
     user text not null references users(username),

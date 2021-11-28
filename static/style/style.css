@@ -9,9 +9,10 @@
     font-size: 25px;
     text-decoration: none;
 }
-#alert_box{
-    background: #434343;
+.alert{
+    background:  #7E7E7E;
     color: #ffc107;
+    font-size: 25px;
 }
 
 .navitm:hover{

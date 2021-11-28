@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="row justify-content-center alert" role="alert" id="alert_box">
+    <div class="row justify-content-center alert fade show alert-dismissible" role="alert" id="alert_box">
         {% for message in get_flashed_messages() %}
             <div class="flash text-center">{{ message }}</div>
         {% endfor %}
