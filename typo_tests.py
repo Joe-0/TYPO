@@ -66,7 +66,7 @@ class FlaskrTestCase(unittest.TestCase):
         assert b"Username" in rv.data
         assert b"Password" in rv.data
 
-    def test_login_page(self):
+    def test_register_page(self):
         rv = self.app.get('/registerpage')
         assert b'Sign up for Typo !' in rv.data
         assert b"Already have an account?" in rv.data
