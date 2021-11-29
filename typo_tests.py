@@ -59,6 +59,10 @@ class FlaskrTestCase(unittest.TestCase):
         assert b'Add New challenge Text' in rv.data
         assert b'Type challenge text here' in rv.data
 
+    def test_profile_page(self):
+        rv = self.app.get('/profile')
+        assert b'User Profile' in rv.data
+
     def test_login_page(self):
         rv = self.app.get('/loginpage')
         assert b'Welcome back to Typo !' in rv.data
