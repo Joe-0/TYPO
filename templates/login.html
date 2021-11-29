@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block body %}
+    <div class="row msg justify-content-center alert alert-dismissible fade show" role="alert"
+         id="alert_box">{{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+
+
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div class="card" style="border-radius: 15px;">
+                        <div class="card-body p-5">
+                            <h2 class="text-uppercase text-center mb-5">Welcome back to Typo !</h2>
+
+                            <form action="{{ url_for('login') }}" method="post">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input name="username" type="text" class="form-control" id="username"
+                                           aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input name="password" type="password" class="form-control" id="password">
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit" class="btn btn-primary float-end">Sign In</button>
+                                </div>
+                            </form>
+                            <br>
+                            <div class="float-start">
+                                Don't have an account?<a href="{{ url_for('registerpage') }}">Sign Up</a>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

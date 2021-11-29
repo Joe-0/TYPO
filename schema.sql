@@ -9,9 +9,11 @@ create table challengeText (
 CREATE TABLE IF NOT EXISTS users (
     id integer primary key autoincrement,
     username text not null unique,
-    password text not null unique,
-    isAdmin boolean
+    password text not null ,
+    highscore integer DEFAULT 0,
+    isAdmin boolean DEFAULT 0
 );
+
 
 CREATE TABLE IF NOT EXISTS attempts (
     id integer primary key autoincrement,

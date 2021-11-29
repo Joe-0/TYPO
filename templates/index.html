@@ -1,96 +1,98 @@
 {% extends "layout.html" %}
 {% block body %}
+    <div class="row msg justify-content-center alert alert-dismissible fade show" role="alert"
+         id="alert_box">{{ msg }}<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>
 
-        <div class="container-fluid">
-            <div class="row justify-content-center alert" role="alert" id="alert_box">
-            </div>
-            <div class="row justify-content-center">
-                <div class=" col-10">
 
-                    <div class=" row timer float-end d-inline">
-                        <div class=" heading_text d-inline position-static">Time Elapsed:</div>
-                        <div class=" time timeElapsed d-inline" id="timeElapsed">0</div>
-                        <div class=" time d-inline">s</div>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class=" col-10">
 
-                    </div>
-                    <br>
+                <div class=" row timer float-end d-inline">
+                    <div class=" heading_text d-inline position-static">Time Elapsed:</div>
+                    <div class=" time timeElapsed d-inline" id="timeElapsed">0</div>
+                    <div class=" time d-inline">s</div>
 
-                    <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
+                </div>
+                <br>
 
-                    <div class="row">
+                <div class="text-display text-center pb-4 pt-4" id="textDisplay">{{ texts.text }}</div>
+
+                <div class="row">
                        <textarea onpaste="return false"
                                  class=" text-input form-control rounded w-100 pt-3 pb-5 bg-muted border-secondary"
                                  rows="3"
                                  id="textInput" autofocus placeholder="Begin typing when ready"></textarea>
-                    </div>
-                    <div class="'row float-end">
-                        <form action="{{ url_for('show_index') }}" method="get">
-                            <div class="row pe-3 pt-2">
-                                <button class="btn btn-primary" type="submit">Restart</button>
-                            </div>
-                        </form>
-                    </div>
-
                 </div>
-
+                <div class="'row float-end">
+                    <form action="{{ url_for('show_index') }}" method="get">
+                        <div class="row pe-3 pt-2">
+                            <button class="btn btn-primary" type="submit">Restart</button>
+                        </div>
+                    </form>
+                </div>
 
             </div>
 
-            <br>
-
-
-            <div class="row  justify-content-center">
-                <div class="col-9">
-                    <div class="row justify-content-center">
-                        <div class="col text-center  ">
-                            <div class="heading_text row justify-content-center">
-                                WPM
-                            </div>
-                            <div id="WPM" class="pink row justify-content-center">
-                                -
-                            </div>
-                        </div>
-                        <div class="col text-center ">
-                            <div class="heading no-gutters row justify-content-center" style="color: #434343">
-                                a
-                            </div>
-                            <div class="mult row no-gutters justify-content-center">
-                                X
-                            </div>
-                        </div>
-                        <div class="col-4 text-center ">
-                            <div class="heading_text row justify-content-center">
-                                Accuracy
-                            </div>
-                            <div class="d-inline row justify-content-center">
-                                <div id="accuracy" class="pink d-inline text-center ">
-                                    -
-                                </div>
-                                <div class="d-inline px-0 mx-0" style="font-size:30px;color: #FA008F;font-family: 'Open Sans';">%
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col text-center ">
-                            <div class="heading no-gutters row justify-content-center" style="color: #434343">
-                                a
-                            </div>
-                            <div class="mult row no-gutters justify-content-center">
-                                =
-                            </div>
-                        </div>
-                        <div class="col text-center px-0 mx-1 ">
-                            <div class="heading_text row justify-content-center">
-                                Accurate WPM
-                            </div>
-                            <div id="AWPM" class="pink row justify-content-center">
-                                -
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
 
         </div>
+
+        <br>
+
+
+        <div class="row  justify-content-center">
+            <div class="col-9">
+                <div class="row justify-content-center">
+                    <div class="col text-center  ">
+                        <div class="heading_text row justify-content-center">
+                            WPM
+                        </div>
+                        <div id="WPM" class="pink row justify-content-center">
+                            -
+                        </div>
+                    </div>
+                    <div class="col text-center ">
+                        <div class="heading no-gutters row justify-content-center" style="color: #434343">
+                            a
+                        </div>
+                        <div class="mult row no-gutters justify-content-center">
+                            X
+                        </div>
+                    </div>
+                    <div class="col-4 text-center ">
+                        <div class="heading_text row justify-content-center">
+                            Accuracy
+                        </div>
+                        <div class="d-inline row justify-content-center">
+                            <div id="accuracy" class="pink d-inline text-center ">
+                                -
+                            </div>
+                            <div class="d-inline px-0 mx-0"
+                                 style="font-size:30px;color: #FA008F;font-family: 'Open Sans';">%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col text-center ">
+                        <div class="heading no-gutters row justify-content-center" style="color: #434343">
+                            a
+                        </div>
+                        <div class="mult row no-gutters justify-content-center">
+                            =
+                        </div>
+                    </div>
+                    <div class="col text-center px-0 mx-1 ">
+                        <div class="heading_text row justify-content-center">
+                            Accurate WPM
+                        </div>
+                        <div id="AWPM" class="pink row justify-content-center">
+                            -
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}
