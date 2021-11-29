@@ -15,7 +15,6 @@ import unittest
 import tempfile
 
 
-
 class FlaskrTestCase(unittest.TestCase):
 
     def setUp(self):
@@ -28,6 +27,7 @@ class FlaskrTestCase(unittest.TestCase):
     def tearDown(self):
         os.close(self.db_fd)
         os.unlink(flaskr.app.config['DATABASE'])
+
 
     def register(self, username, password):
         return self.app.post('/register', data=dict(
