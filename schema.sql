@@ -5,7 +5,7 @@ create table challengeText (
   'text' text not null
 );
 
-
+drop table if exists users;
 CREATE TABLE IF NOT EXISTS users (
     id integer primary key autoincrement,
     username text not null unique,
