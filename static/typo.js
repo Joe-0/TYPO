@@ -13,16 +13,19 @@ const AWPMelement = document.getElementById(('AWPM'))
 const accuracyElement = document.getElementById('accuracy')
 const alertElement = document.getElementById('alert_box')
 const timeElement = document.getElementById('timetrack')
+const session_element = document.getElementById('session_log')
 // get the number of words and character in the challenge text
 const num_words = textDisplayElement.innerText.split(' ').length
 const num_char = textDisplayElement.innerText.length
-
+const session_val = session_element.value
 
 let time = 0
 let Interval
 let count = 1
 let strt = textDisplayElement.innerHTML
 let strin_len
+
+
 
 
 textDisplayElement.innerHTML = ''
@@ -105,8 +108,18 @@ function endchallenge() {
     let accuracy = (count_correct / num_char) * 100
     accuracyElement.innerHTML = accuracy.toFixed(1)
     let accurate_WPM = (wpm * accuracy)/100
-    AWPMelement.innerHTML = Math.floor(accurate_WPM)
+    AWPMelement.innerHTML = accurate_WPM.toFixed(0)
 
+
+    if (session_val) {
+        const user_id = document.getElementById('user_id').value
+        var http = new XMLHttpRequest();
+        var url = '/check_highscore';
+        const params = 'highscore=' + AWPMelement.innerHTML +"&user_id="+user_id;
+        http.open('POST', url, true);
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http.send(params);
+    }
 }
 
 document.addEventListener("DOMContentLoaded",ready)

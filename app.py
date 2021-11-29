@@ -35,9 +35,10 @@ def init_db():
     db = get_db()
     with app.open_resource('schema.sql', mode='r') as f:
         db.cursor().executescript(f.read())
-    db.execute('INSERT INTO users (username, password, isadmin) values (?, ?, ?)',['admin1',(werkzeug.security.generate_password_hash('default',
-                                                                  method='pbkdf2:sha256',
-                                                                  salt_length=16)), True])
+    db.execute('INSERT INTO users (username, password, isadmin) values (?, ?, ?)',
+               ['admin1', (werkzeug.security.generate_password_hash('default',
+                                                                    method='pbkdf2:sha256',
+                                                                    salt_length=16)), True])
     db.commit()
 
 
@@ -130,6 +131,7 @@ def login():
                 session['logged_in'] = True
                 session['id'] = account['id']
                 session['username'] = account['username']
+                session['highscore'] = account['highscore']
                 session['isadmin'] = account['isadmin']
                 msg = 'Signed in successfully !'
                 return render_template('index.html', msg=msg, texts=texts)
@@ -141,6 +143,7 @@ def login():
             msg = 'Incorrect username / password !'
     return render_template('login.html', msg=msg)
 
+
 @app.route('/logout')
 def logout():
     db = get_db()
@@ -149,9 +152,11 @@ def logout():
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
-    session.pop('isadmin',None)
+    session.pop('highscore', None)
+    session.pop('isadmin', None)
     msg = "Signed out successfully"
     return render_template('index.html', msg=msg, texts=texts)
+
 
 @app.route('/attempts')
 def fetchAttempts():
@@ -183,6 +188,31 @@ def profile():
     return render_template('profile.html')
 
 
+@app.route('/check_highscore', methods=['POST'])
+def check_highscore():
+    '''score = request.form['highscore']
+    if (request.form['highscore']>score):
+        db = get_db()
+        db.execute('UPDATE users SET highscore = ? WHERE username = ?', [score, session['username']])
+        db.commit()
+        return ""
+    else:
+        return ""'''
+    score = int(request.form['highscore'])
+    user_id = request.form['user_id']
+    db = get_db()
+    cur = db.execute('SELECT * FROM users WHERE id = ?', [user_id])
+    account = cur.fetchone()
+
+    if (score > account['highscore']):
+        db.execute('UPDATE users SET highscore = ? WHERE id = ?', [score, user_id])
+        db.commit()
+        session['highscore'] = score
+        return ""
+    else:
+        return ""
+
+
 @app.route('/add_challenge_text')
 def add_text():
     return render_template('addtext.html')
@@ -196,4 +226,3 @@ def submit_text():
     db.commit()
     flash('Challenge text added successfully')
     return redirect(url_for('add_text'))
-
