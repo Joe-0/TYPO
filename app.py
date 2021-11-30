@@ -181,9 +181,11 @@ def registerpage():
 @app.route('/leaderboard')
 def leaderBoard():
     db = get_db()
-    cur = db.execute('select * from users order by desc highscore')
+    cur = db.execute('select * from users order by highscore desc')
     leaders = cur.fetchall()
-    return render_template('leaderboard.html', leaders)
+    cur = db.execute('select * from users order by id asc')
+    order = cur.fetchall()
+    return render_template('leaderboard.html', leaders_order=zip(leaders,order))
 
 
 @app.route('/profile')
