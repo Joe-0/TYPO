@@ -180,7 +180,10 @@ def registerpage():
 
 @app.route('/leaderboard')
 def leaderBoard():
-    return render_template('leaderboard.html')
+    db = get_db()
+    cur = db.execute('select * from users order by desc highscore')
+    leaders = cur.fetchall()
+    return render_template('leaderboard.html', leaders)
 
 
 @app.route('/profile')
@@ -226,3 +229,5 @@ def submit_text():
     db.commit()
     flash('Challenge text added successfully')
     return redirect(url_for('add_text'))
+
+
