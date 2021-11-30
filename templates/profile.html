@@ -12,7 +12,17 @@
                             <h2 class="text-center mb-5">{{ session.username }}</h2>
                             <br>
                             <h4 class="text-uppercase text-center mb-5">Highest WPM : {{ session.highscore }}</h4>
-
+                            <br>
+                            <ul>
+                            {% for attempt in attempts %}
+                                <div class = 'row mb-5'>
+                                    <h4 class = 'col-md-5'> WPM: {{ attempt.wpm }} </h4>
+                                    <h4 class = 'col-md-5'> Accuracy: {{ attempt.accuracy }}</h4>
+                                </div>
+                            {% else %}
+                                <li><em>Unbelievable.  No entries here so far</em></li>
+                            {% endfor %}
+                          </ul>
                         </div>
                     </div>
                 </div>

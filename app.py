@@ -160,12 +160,7 @@ def logout():
 
 @app.route('/attempts')
 def fetchAttempts():
-    db = get_db()
-    cur = db.execute('select * from attempts where users == ? order by id', request.form['user'])
-    attempts = cur.fetchall()
-
-    # make render template will redirect to an html page that will show the attempts
-    # return render_template('show_entries.html', entries=entries, distinct=distinct)
+    return None
 
 
 @app.route('/loginpage')
@@ -185,7 +180,11 @@ def leaderBoard():
 
 @app.route('/profile')
 def profile():
-    return render_template('profile.html')
+    username = request.args.get('user_profile')
+    db = get_db()
+    cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
+    attempts = cur.fetchall()
+    return render_template('profile.html', attempts=attempts)
 
 
 @app.route('/check_highscore', methods=['POST'])

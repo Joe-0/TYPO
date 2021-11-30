@@ -43,7 +43,7 @@
                         <a class="navitm" href="{{ url_for('show_index') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="navitm" href="{{ url_for('profile') }}">Profile</a>
+                        <a class="navitm" href="{{ url_for('profile', user_profile=session.username) }}">Profile</a>
                     </li>
                     <li class="nav-item">
                         <a class="navitm" href="{{ url_for('leaderBoard') }}">Leaderboard</a>
@@ -59,7 +59,7 @@
                                 Sign out</a>
                         </li>
                         <li class="nav-item">
-                            <a class="navitm" href="{{ url_for('profile') }}"><span class="fas fa-user"></span>
+                            <a class="navitm" href="{{ url_for('profile', user_profile=session.username) }}"><span class="fas fa-user"></span>
                                 {{ session.username }}</a>
                         </li>
                     {% else %}
