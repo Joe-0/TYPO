@@ -113,12 +113,20 @@ function endchallenge() {
 
     if (session_val) {
         const user_id = document.getElementById('user_id').value
+        const user_name = document.getElementById('user_name').value
         var http = new XMLHttpRequest();
         var url = '/check_highscore';
         const params = 'highscore=' + AWPMelement.innerHTML +"&user_id="+user_id;
         http.open('POST', url, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         http.send(params);
+
+        var http2 = new XMLHttpRequest();
+        var url2 = '/attempts';
+        const params2 = 'wpm='+ WPMelement.innerHTML +'&acc='+accuracyElement.innerHTML+'&acc_wpm=' + AWPMelement.innerHTML +"&user_name="+user_name;
+        http2.open('POST', url2, true);
+        http2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http2.send(params2)
     }
 }
 

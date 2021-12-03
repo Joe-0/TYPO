@@ -157,12 +157,6 @@ def logout():
     msg = "Signed out successfully"
     return render_template('index.html', msg=msg, texts=texts)
 
-
-@app.route('/attempts')
-def fetchAttempts():
-    return None
-
-
 @app.route('/loginpage')
 def loginpage():
     return render_template('login.html')
@@ -180,7 +174,7 @@ def leaderBoard():
     leaders = cur.fetchall()
     cur = db.execute('select * from users order by id asc')
     order = cur.fetchall()
-    return render_template('leaderboard.html', leaders_order=zip(leaders,order))
+    return render_template('leaderboard.html', leaders_order=zip(leaders, order))
 
 
 @app.route('/profile')
@@ -194,14 +188,6 @@ def profile():
 
 @app.route('/check_highscore', methods=['POST'])
 def check_highscore():
-    '''score = request.form['highscore']
-    if (request.form['highscore']>score):
-        db = get_db()
-        db.execute('UPDATE users SET highscore = ? WHERE username = ?', [score, session['username']])
-        db.commit()
-        return ""
-    else:
-        return ""'''
     score = int(request.form['highscore'])
     user_id = request.form['user_id']
     db = get_db()
@@ -216,6 +202,17 @@ def check_highscore():
     else:
         return ""
 
+@app.route('/attempts', methods=['POST'])
+def fetchAttempts():
+    wpm = request.form['wpm']
+    accuracy = request.form['acc']
+    acc_wpm = request.form['acc_wpm']
+    user = request.form['user_name']
+    db = get_db()
+    db.execute('INSERT INTO attempts (user,wpm,accuracy,acc_wpm) VALUES(?,?,?,?)',
+               [user, wpm, accuracy, acc_wpm])
+    db.commit()
+    return ""
 
 @app.route('/add_challenge_text')
 def add_text():
