@@ -190,7 +190,7 @@ def profile():
         for i in attempts:
             sum = sum + i['acc_wpm']
             count = count + 1
-        avg = sum / count
+        avg = round(sum / count,2)
         return render_template('profile.html', attempts=attempts, avg=avg)
     else:
         return render_template('profile.html', attempts=attempts, avg=0)
