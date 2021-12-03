@@ -180,22 +180,23 @@ def leaderBoard():
 def profile():
     username = request.args.get('user_profile')
     db = get_db()
-    cur = db.execute('select * from users where username = ? order by id DESC', [username])
-    account = cur.fetchone()
-    highscore = account['highscore']
+
 
     cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
     attempts = cur.fetchall()
     count = 0
     sum = 0
     if attempts:
+        cur = db.execute('select * from users where username = ? order by id DESC', [username])
+        account = cur.fetchone()
+        highscore = account['highscore']
         for i in attempts:
             sum = sum + i['acc_wpm']
             count = count + 1
         avg = round(sum / count,2)
-        return render_template('profile.html', attempts=attempts, avg=avg, highscore=highscore)
+        return render_template('profile.html', attempts=attempts, avg=avg,highscore=highscore)
     else:
-        return render_template('profile.html', attempts=attempts, avg=0, highscore=highscore)
+        return render_template('profile.html', attempts=attempts, avg=None, highscore=None)
 
 
 @app.route('/check_highscore', methods=['POST'])
