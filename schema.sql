@@ -20,7 +20,8 @@ CREATE TABLE IF NOT EXISTS attempts (
     user text not null references users(username),
     wpm integer not null,
     accuracy integer not null,
-    acc_wpm interger not null
+    acc_wpm interger not null,
+    date text not null
 );
 
 

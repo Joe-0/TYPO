@@ -121,9 +121,15 @@ function endchallenge() {
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         http.send(params);
 
+        const d = new Date()
+        const day = d.getDate()
+        const month = d.getMonth() +1
+        const year = d.getFullYear()
+        const date = month+'/'+day+'/'+year
+
         var http2 = new XMLHttpRequest();
         var url2 = '/attempts';
-        const params2 = 'wpm='+ WPMelement.innerHTML +'&acc='+accuracyElement.innerHTML+'&acc_wpm=' + AWPMelement.innerHTML +"&user_name="+user_name;
+        const params2 = 'wpm='+ WPMelement.innerHTML +'&acc='+accuracyElement.innerHTML+'&acc_wpm=' + AWPMelement.innerHTML +"&user_name="+user_name+"&date="+date;
         http2.open('POST', url2, true);
         http2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         http2.send(params2)

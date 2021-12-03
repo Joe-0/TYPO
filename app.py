@@ -157,6 +157,7 @@ def logout():
     msg = "Signed out successfully"
     return render_template('index.html', msg=msg, texts=texts)
 
+
 @app.route('/loginpage')
 def loginpage():
     return render_template('login.html')
@@ -183,7 +184,16 @@ def profile():
     db = get_db()
     cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
     attempts = cur.fetchall()
-    return render_template('profile.html', attempts=attempts)
+    count = 0
+    sum = 0
+    if attempts:
+        for i in attempts:
+            sum = sum + i['acc_wpm']
+            count = count + 1
+        avg = sum / count
+        return render_template('profile.html', attempts=attempts, avg=avg)
+    else:
+        return render_template('profile.html', attempts=attempts, avg=0)
 
 
 @app.route('/check_highscore', methods=['POST'])
@@ -202,17 +212,20 @@ def check_highscore():
     else:
         return ""
 
+
 @app.route('/attempts', methods=['POST'])
 def fetchAttempts():
     wpm = request.form['wpm']
     accuracy = request.form['acc']
     acc_wpm = request.form['acc_wpm']
     user = request.form['user_name']
+    date = request.form['date']
     db = get_db()
-    db.execute('INSERT INTO attempts (user,wpm,accuracy,acc_wpm) VALUES(?,?,?,?)',
-               [user, wpm, accuracy, acc_wpm])
+    db.execute('INSERT INTO attempts (user,wpm,accuracy,acc_wpm,date) VALUES(?,?,?,?,?)',
+               [user, wpm, accuracy, acc_wpm, date])
     db.commit()
     return ""
+
 
 @app.route('/add_challenge_text')
 def add_text():
@@ -227,5 +240,3 @@ def submit_text():
     db.commit()
     flash('Challenge text added successfully')
     return redirect(url_for('add_text'))
-
-

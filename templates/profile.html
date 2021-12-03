@@ -12,24 +12,30 @@
                             <h2 class="text-center mb-5">{{ session.username }}</h2>
                             <h4 class="text-uppercase text-center mb-5">Highest WPM : {{ session.highscore }}</h4>
                             <table class="table table-striped table-dark table-bordered table-hover table-md">
-                                <caption  style="caption-side: top;"><h4 class="text-uppercase text-center" style="color: #FA008F;">Past Challenge Attempts</h4></caption>
+                                <caption style="caption-side: top;"><h4 class="text-uppercase text-center"
+                                                                        style="color: #FA008F;">Past Challenge
+                                    Attempts</h4></caption>
                                 <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">WPM</th>
                                     <th scope="col">Accuracy</th>
                                     <th scope="col">Accurate WPM</th>
+                                    <th scope="col">Date of Attempt</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 {% for attempt in attempts %}
                                     <tr>
-                                        <th scope="row"><p class="h3">{{ attempt.wpm }}</p></th>
-                                        <td><p class="h2">{{ attempt.accuracy }}</p></td>
-                                        <td><p class="h2 float-end"> {{ attempt.acc_wpm }}</p></td>
+                                        <th scope="row"><p class="h4">{{ attempt.wpm }}</p></th>
+                                        <td><p class="h4 float-end">{{ attempt.accuracy }}</p></td>
+                                        <td><p class="h4 float-end"> {{ attempt.acc_wpm }}</p></td>
+                                        <td><p class="h4 float-end"> {{ attempt.date }}</p></td>
                                     </tr>
 
                                 {% endfor %}
                                 </tbody>
+                                <h5 class="text-uppercase text-center ">Average Accurate WPM of all attempts
+                                    : {{ avg }}</h5>
                             </table>
                         </div>
                     </div>

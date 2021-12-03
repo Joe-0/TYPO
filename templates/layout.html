@@ -43,9 +43,16 @@
                     <li class="nav-item active">
                         <a class="navitm" href="{{ url_for('show_index') }}">Home</a>
                     </li>
+                    {% if session.logged_in %}
                     <li class="nav-item">
                         <a class="navitm" href="{{ url_for('profile', user_profile=session.username) }}">Profile</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="navitm" href="{{ url_for('loginpage') }}">Profile</a>
+                    </li>
+                    {% endif %}
+
                     <li class="nav-item">
                         <a class="navitm" href="{{ url_for('leaderBoard') }}">Leaderboard</a>
                     </li>
