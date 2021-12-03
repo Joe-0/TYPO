@@ -52,7 +52,7 @@ function text_color() {
         correct = true
     }
 
-    if (correct) endchallenge()
+
 
     const arrayText = textDisplayElement.querySelectorAll('span')
     const arrayInText = textInputElement.value.split('')
@@ -70,6 +70,7 @@ function text_color() {
         }
 
     })
+    if (correct) endchallenge()
 
 }
 
@@ -90,7 +91,7 @@ function endchallenge() {
     alertElement.innerHTML = "Typing Test Comlpeted! If you wish to test again, then click the restart button"
     textInputElement.removeEventListener('input', text_color)
     textInputElement.disabled = true
-    let count_correct = 1
+    let count_correct = 0
     let end_time = timeElapsedElement.innerText / 60
     let wpm = (num_words / end_time)
     WPMelement.innerHTML = wpm.toFixed(0)
@@ -100,9 +101,8 @@ function endchallenge() {
             count_correct++
         }
     })
-    if (count_correct ==1){
-        count_correct= 0
-    }
+    if (count_correct )
+
     console.log(count_correct)
     console.log(num_char)
     let accuracy = (count_correct / num_char) * 100

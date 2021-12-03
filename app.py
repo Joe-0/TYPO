@@ -131,7 +131,6 @@ def login():
                 session['logged_in'] = True
                 session['id'] = account['id']
                 session['username'] = account['username']
-                session['highscore'] = account['highscore']
                 session['isadmin'] = account['isadmin']
                 msg = 'Signed in successfully !'
                 return render_template('index.html', msg=msg, texts=texts)
@@ -152,7 +151,6 @@ def logout():
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
-    session.pop('highscore', None)
     session.pop('isadmin', None)
     msg = "Signed out successfully"
     return render_template('index.html', msg=msg, texts=texts)
@@ -182,6 +180,10 @@ def leaderBoard():
 def profile():
     username = request.args.get('user_profile')
     db = get_db()
+    cur = db.execute('select * from users where username = ? order by id DESC', [username])
+    account = cur.fetchone()
+    highscore = account['highscore']
+
     cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
     attempts = cur.fetchall()
     count = 0
@@ -191,9 +193,9 @@ def profile():
             sum = sum + i['acc_wpm']
             count = count + 1
         avg = round(sum / count,2)
-        return render_template('profile.html', attempts=attempts, avg=avg)
+        return render_template('profile.html', attempts=attempts, avg=avg, highscore=highscore)
     else:
-        return render_template('profile.html', attempts=attempts, avg=0)
+        return render_template('profile.html', attempts=attempts, avg=0, highscore=highscore)
 
 
 @app.route('/check_highscore', methods=['POST'])
@@ -207,7 +209,6 @@ def check_highscore():
     if (score > account['highscore']):
         db.execute('UPDATE users SET highscore = ? WHERE id = ?', [score, user_id])
         db.commit()
-        session['highscore'] = score
         return ""
     else:
         return ""
