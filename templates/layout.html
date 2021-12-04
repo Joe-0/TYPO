@@ -86,6 +86,14 @@
         </div>
     </nav>
 
+    {% for message in get_flashed_messages() %}
+    <div class="row justify-content-center alert fade show alert-dismissible" role="alert" id="alert_box">
+            <div class="flash text-center">{{ message }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
+
     <div class="container">
         {% block body %}{% endblock %}
     </div>

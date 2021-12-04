@@ -87,19 +87,20 @@ def close_db(error):
 
 
 # This function takes a username and password input and (hopefully) securely stores them into a users database
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST'])
 def register():
-    msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+    if 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         db = get_db()
         cur = db.execute('select * from users where username = ?', [username])
         account = cur.fetchone()
         if account:
-            msg = 'Username already exists! Please chooses a different username'
+            flash('Username already exists! Please chooses a different username')
+            return redirect(url_for('registerpage'))
         elif not username or not password:
-            msg = 'Please fill out the required fields!'
+            flash('Please fill out the required fields!')
+            return redirect(url_for('registerpage'))
         else:
             db.execute('INSERT INTO users (username, password) values (?, ?)',
                        [request.form['username'],
@@ -107,20 +108,21 @@ def register():
                                                                   method='pbkdf2:sha256',
                                                                   salt_length=16))])
             db.commit()
-            msg = 'You have successfully signed up. Please Sign in to continue'
+            flash('You have successfully signed up. Please Sign in to continue')
+            return redirect(url_for('registerpage'))
     elif request.method == 'POST':
-        msg = 'Please fill out the required fields!'
-    return render_template('register.html', msg=msg)
+        flash('Please fill out the required fields!')
+        return redirect(url_for('registerpage'))
+    else:
+        flash('Please fill out the required fields!')
+        return redirect(url_for('registerpage'))
 
 
 # This function logs a user given a username and password. Not quite sure which website to redirect to.
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods=['POST'])
 def login():
     db = get_db()
-    cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
-    texts = cur.fetchone()
-    msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
+    if 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         cur = db.execute('Select * FROM users where username = ?', [username])
@@ -132,15 +134,20 @@ def login():
                 session['id'] = account['id']
                 session['username'] = account['username']
                 session['isadmin'] = account['isadmin']
-                msg = 'Signed in successfully !'
-                return render_template('index.html', msg=msg, texts=texts)
+                flash('Signed in successfully !')
+                return redirect(url_for('show_index'))
             else:
-                msg = 'Incorrect username / password !'
+                flash('Incorrect username / password !')
+                return redirect(url_for('loginpage'))
         elif not username or not password:
-            msg = 'Please fill out the required fields!'
+            flash('Please fill out the required fields!')
+            return redirect(url_for('loginpage'))
         else:
-            msg = 'Incorrect username / password !'
-    return render_template('login.html', msg=msg)
+            flash('Incorrect username / password !')
+            return redirect(url_for('loginpage'))
+    else:
+        flash('Please fill out the required fields!')
+        return redirect(url_for('loginpage'))
 
 
 @app.route('/logout')
@@ -152,8 +159,8 @@ def logout():
     session.pop('id', None)
     session.pop('username', None)
     session.pop('isadmin', None)
-    msg = "Signed out successfully"
-    return render_template('index.html', msg=msg, texts=texts)
+    flash("Signed out successfully")
+    return redirect(url_for('show_index'))
 
 
 @app.route('/loginpage')
@@ -181,7 +188,6 @@ def profile():
     username = request.args.get('user_profile')
     db = get_db()
 
-
     cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
     attempts = cur.fetchall()
     count = 0
@@ -193,10 +199,10 @@ def profile():
         for i in attempts:
             sum = sum + i['acc_wpm']
             count = count + 1
-        avg = round(sum / count,2)
-        return render_template('profile.html', attempts=attempts, avg=avg,highscore=highscore)
+        avg = round(sum / count, 2)
+        return render_template('profile.html', attempts=attempts, avg=avg, highscore=highscore)
     else:
-        return render_template('profile.html', attempts=attempts, avg=None, highscore=None)
+        return render_template('profile.html', attempts=attempts, avg=0, highscore=0)
 
 
 @app.route('/check_highscore', methods=['POST'])

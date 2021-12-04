@@ -1,11 +1,5 @@
 {% extends "layout.html" %}
 {% block body %}
-    <div class="row justify-content-center alert fade show alert-dismissible" role="alert" id="alert_box">
-        {% for message in get_flashed_messages() %}
-            <div class="flash text-center">{{ message }}</div>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        {% endfor %}
-    </div>
     <div class="d-flex justify-content-center">
         <h2 class="font-weight-bold" style="color: #FFDDEA">Add New challenge Text</h2>
     </div>

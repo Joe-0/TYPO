@@ -36,6 +36,11 @@
     font-size: 25px;
 }
 
+#alert_alert{
+    background: #434343;
+    color: #ffc107;
+}
+
 #results {
     position: absolute;
     width: 700px;

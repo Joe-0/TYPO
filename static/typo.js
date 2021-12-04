@@ -11,7 +11,7 @@ const timeElapsedElement = document.getElementById('timeElapsed')
 const WPMelement = document.getElementById('WPM')
 const AWPMelement = document.getElementById(('AWPM'))
 const accuracyElement = document.getElementById('accuracy')
-const alertElement = document.getElementById('alert_box')
+const alertElement = document.getElementById('alert_alert')
 const timeElement = document.getElementById('timetrack')
 const session_element = document.getElementById('session_log')
 // get the number of words and character in the challenge text
