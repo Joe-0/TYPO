@@ -21,7 +21,7 @@
 
 </head>
 
-<body style="background-image: url('/static/img/typobackground.PNG'); background-repeat: no-repeat; background-attachment: fixed;  background-size: 100% 100%; ">
+<body style="background: #434343 ; background-repeat: no-repeat; background-attachment: fixed;  background-size: 100% 100%; ">
 
 
 <div class="container">
@@ -36,15 +36,23 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <input type="hidden" name="id" value="{{ session.logged_in }}" id="session_log">
-                <input type="hidden" name="id" value="{{ session.id }}" id="user_id">
+                <input type="hidden" name="session_log" value="{{ session.logged_in }}" id="session_log">
+                <input type="hidden" name="user_id" value="{{ session.id }}" id="user_id">
+                <input type="hidden" name="user_name" value="{{ session.username }}" id="user_name">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
                         <a class="navitm" href="{{ url_for('show_index') }}">Home</a>
                     </li>
+                    {% if session.logged_in %}
                     <li class="nav-item">
                         <a class="navitm" href="{{ url_for('profile', user_profile=session.username) }}">Profile</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="navitm" href="{{ url_for('loginpage') }}">Profile</a>
+                    </li>
+                    {% endif %}
+
                     <li class="nav-item">
                         <a class="navitm" href="{{ url_for('leaderBoard') }}">Leaderboard</a>
                     </li>
@@ -77,6 +85,14 @@
             </div>
         </div>
     </nav>
+
+    {% for message in get_flashed_messages() %}
+    <div class="row justify-content-center alert fade show alert-dismissible" role="alert" id="alert_box">
+            <div class="flash text-center">{{ message }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+
 
     <div class="container">
         {% block body %}{% endblock %}

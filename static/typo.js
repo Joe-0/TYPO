@@ -11,7 +11,7 @@ const timeElapsedElement = document.getElementById('timeElapsed')
 const WPMelement = document.getElementById('WPM')
 const AWPMelement = document.getElementById(('AWPM'))
 const accuracyElement = document.getElementById('accuracy')
-const alertElement = document.getElementById('alert_box')
+const alertElement = document.getElementById('alert_alert')
 const timeElement = document.getElementById('timetrack')
 const session_element = document.getElementById('session_log')
 // get the number of words and character in the challenge text
@@ -52,7 +52,7 @@ function text_color() {
         correct = true
     }
 
-    if (correct) endchallenge()
+
 
     const arrayText = textDisplayElement.querySelectorAll('span')
     const arrayInText = textInputElement.value.split('')
@@ -70,6 +70,7 @@ function text_color() {
         }
 
     })
+    if (correct) endchallenge()
 
 }
 
@@ -90,7 +91,7 @@ function endchallenge() {
     alertElement.innerHTML = "Typing Test Comlpeted! If you wish to test again, then click the restart button"
     textInputElement.removeEventListener('input', text_color)
     textInputElement.disabled = true
-    let count_correct = 1
+    let count_correct = 0
     let end_time = timeElapsedElement.innerText / 60
     let wpm = (num_words / end_time)
     WPMelement.innerHTML = wpm.toFixed(0)
@@ -100,9 +101,8 @@ function endchallenge() {
             count_correct++
         }
     })
-    if (count_correct ==1){
-        count_correct= 0
-    }
+    if (count_correct )
+
     console.log(count_correct)
     console.log(num_char)
     let accuracy = (count_correct / num_char) * 100
@@ -113,12 +113,26 @@ function endchallenge() {
 
     if (session_val) {
         const user_id = document.getElementById('user_id').value
+        const user_name = document.getElementById('user_name').value
         var http = new XMLHttpRequest();
         var url = '/check_highscore';
         const params = 'highscore=' + AWPMelement.innerHTML +"&user_id="+user_id;
         http.open('POST', url, true);
         http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         http.send(params);
+
+        const d = new Date()
+        const day = d.getDate()
+        const month = d.getMonth() +1
+        const year = d.getFullYear()
+        const date = month+'/'+day+'/'+year
+
+        var http2 = new XMLHttpRequest();
+        var url2 = '/attempts';
+        const params2 = 'wpm='+ WPMelement.innerHTML +'&acc='+accuracyElement.innerHTML+'&acc_wpm=' + AWPMelement.innerHTML +"&user_name="+user_name+"&date="+date;
+        http2.open('POST', url2, true);
+        http2.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http2.send(params2)
     }
 }
 
