@@ -51,8 +51,9 @@
 
 #textDisplay {
     font-family: 'Raleway';
-    color: #7C7C7C;
-    font-size: 22px;
+    color: #ffc107;
+    font-weight: bold;
+    font-size: 24px;
 
 }
 
