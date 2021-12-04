@@ -108,7 +108,8 @@ function endchallenge() {
     let accuracy = (count_correct / num_char) * 100
     accuracyElement.innerHTML = accuracy.toFixed(1)
     let accurate_WPM = (wpm * accuracy)/100
-    AWPMelement.innerHTML = accurate_WPM.toFixed(0)
+    console.log(accurate_WPM)
+    AWPMelement.innerHTML = Math.floor(accurate_WPM)
 
 
     if (session_val) {
