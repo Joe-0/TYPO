@@ -5,7 +5,7 @@ create table challengeText (
   'text' text not null
 );
 
-drop table if exists users;
+
 CREATE TABLE IF NOT EXISTS users (
     id integer primary key autoincrement,
     username text not null unique,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS users (
     isAdmin boolean DEFAULT 0
 );
 
-drop table if exists attempts;
+
 CREATE TABLE IF NOT EXISTS attempts (
     id integer primary key autoincrement,
     user text not null references users(username),
