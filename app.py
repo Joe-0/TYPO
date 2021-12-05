@@ -219,7 +219,7 @@ def check_highscore():
 
 
 @app.route('/attempts', methods=['POST'])
-def fetchAttempts():
+def addAttempts():
     wpm = request.form['wpm']
     accuracy = request.form['acc']
     acc_wpm = request.form['acc_wpm']
