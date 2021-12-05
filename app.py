@@ -152,9 +152,6 @@ def login():
 
 @app.route('/logout')
 def logout():
-    db = get_db()
-    cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
-    texts = cur.fetchone()
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
