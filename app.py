@@ -188,18 +188,21 @@ def profile():
     cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
     attempts = cur.fetchall()
     count = 0
-    sum = 0
+    sum_wpm = 0
+    sum_acc = 0
     if attempts:
         cur = db.execute('select * from users where username = ? order by id DESC', [username])
         account = cur.fetchone()
         highscore = account['highscore']
         for i in attempts:
-            sum = sum + i['acc_wpm']
+            sum_wpm = sum_wpm + i['acc_wpm']
+            sum_acc = sum_acc + i['accuracy']
             count = count + 1
-        avg = round(sum / count, 2)
-        return render_template('profile.html', attempts=attempts, avg=avg, highscore=highscore)
+        avg_wpm = round(sum_wpm / count, 2)
+        avg_acc = round(sum_acc / count, 2)
+        return render_template('profile.html', attempts=attempts, avg_wpm=avg_wpm, avg_acc=avg_acc, highscore=highscore)
     else:
-        return render_template('profile.html', attempts=attempts, avg=0, highscore=0)
+        return render_template('profile.html', attempts=attempts, avg=0, avg_acc=0, highscore=0)
 
 
 @app.route('/check_highscore', methods=['POST'])

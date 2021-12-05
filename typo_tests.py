@@ -8,6 +8,8 @@ https://sun.iwu.edu/~mliffito/flask_tutorial/testing.html
 
     :copyright: (c) 2015 by Armin Ronacher.
     :license: BSD, see LICENSE for more details.
+
+    paragraphs for the challenge texts were obtained from Random Paragraph generator https://randomwordgenerator.com/paragraph.php
 """
 import os
 import app as flaskr
