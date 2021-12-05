@@ -94,21 +94,19 @@ function endchallenge() {
     let count_correct = 0
     let end_time = timeElapsedElement.innerText / 60
     let wpm = (num_words / end_time)
-    WPMelement.innerHTML = wpm.toFixed(0)
+
+    WPMelement.innerHTML = Math.floor(wpm)
     const arr_text = textDisplayElement.querySelectorAll('span')
     arr_text.forEach((charSpan, index) => {
         if (charSpan.classList.contains('correct')) {
             count_correct++
         }
     })
-    if (count_correct )
 
-    console.log(count_correct)
-    console.log(num_char)
     let accuracy = (count_correct / num_char) * 100
     accuracyElement.innerHTML = accuracy.toFixed(1)
     let accurate_WPM = (wpm * accuracy)/100
-    console.log(accurate_WPM)
+
     AWPMelement.innerHTML = Math.floor(accurate_WPM)
 
 
