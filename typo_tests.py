@@ -30,13 +30,14 @@ class FlaskrTestCase(unittest.TestCase):
         os.close(self.db_fd)
         os.unlink(flaskr.app.config['DATABASE'])
 
-
+    #reigster a user with the provided username adnpassword
     def register(self, username, password):
         return self.app.post('/register', data=dict(
             username=username,
             password=password
         ), follow_redirects=True)
 
+    #login with the provided username and password
     def login(self, username, password):
         return self.app.post('/login', data=dict(
             username=username,
@@ -80,22 +81,38 @@ class FlaskrTestCase(unittest.TestCase):
         assert b"Password" in rv.data
 
     def test_register_login_logout(self):
+
+        # regisster a new account
         rv = self.register('admin', 'default')
         assert b'You have successfully signed up. Please Sign in to continue' in rv.data
+
+        # try to register with a pre-existing username
         rv = self.register('admin', 'default')
         assert b'Username already exists! Please chooses a different username' in rv.data
+
+        # submit the regitration form without any username of password
         rv = self.register(None, None)
         assert b'Please fill out the required fields!' in rv.data
         rv = self.register('', '')
         assert b'Please fill out the required fields!' in rv.data
+
+        # sign in
         rv = self.login('admin', 'default')
         assert b'Signed in successfully !' in rv.data
+
+        #sign out
         rv = self.logout()
         assert b'Signed out successfully' in rv.data
+
+        # try to login without entring username or password
         rv = self.login('', '')
         assert b'Please fill out the required fields!' in rv.data
+
+        # try to login with incorrect username
         rv = self.login('adminx', 'default')
         assert b'Incorrect username / password !' in rv.data
+
+        # try to login with incorrect password
         rv = self.login('admin', 'defaultx')
         assert b'Incorrect username / password !' in rv.data
 
