@@ -9,12 +9,14 @@
     URL : https://www.geeksforgeeks.org/login-and-registration-project-using-flask-and-mysql/
 """
 
+# all the imports
 import os, random, werkzeug, csv
 from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, g, redirect, url_for, render_template, send_from_directory, flash, session
 
-app = Flask(__name__)
+app = Flask(__name__) # create the application instance :)
 
+# Load default config and override config from an environment variable
 app.config.update(dict(
     DATABASE=os.path.join(app.root_path, 'typo.db'),
     DEBUG=True,
@@ -74,6 +76,7 @@ def get_db():
 @app.route('/')
 def show_index():
     db = get_db()
+    # select a random row from the challengeText table
     cur = db.execute('SELECT * FROM challengeText ORDER BY RANDOM() LIMIT 1')
     texts = cur.fetchone()
     return render_template('index.html', texts=texts)
@@ -89,18 +92,24 @@ def close_db(error):
 # This function takes a username and password input and (hopefully) securely stores them into a users database
 @app.route('/register', methods=['POST'])
 def register():
+    # check if username and paswoord were submitted in the post request
     if 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         db = get_db()
+
+        # find a user in the database with the submmited username
         cur = db.execute('select * from users where username = ?', [username])
         account = cur.fetchone()
+
+        # if a user is found, than that username already exits and prompt the user to choose a different username.
         if account:
             flash('Username already exists! Please chooses a different username')
             return redirect(url_for('registerpage'))
         elif not username or not password:
             flash('Please fill out the required fields!')
             return redirect(url_for('registerpage'))
+        # if it's a new username, then enter that username and hashed password into the users table
         else:
             db.execute('INSERT INTO users (username, password) values (?, ?)',
                        [request.form['username'],
@@ -110,6 +119,8 @@ def register():
             db.commit()
             flash('You have successfully signed up. Please Sign in to continue')
             return redirect(url_for('registerpage'))
+
+    # if an empty form is submitted then prompt the user to fill the required fields.
     elif request.method == 'POST':
         flash('Please fill out the required fields!')
         return redirect(url_for('registerpage'))
@@ -118,17 +129,23 @@ def register():
         return redirect(url_for('registerpage'))
 
 
-# This function logs a user given a username and password. Not quite sure which website to redirect to.
+# This function logs a user given a username and password.
 @app.route('/login', methods=['POST'])
 def login():
     db = get_db()
+
+    # check if username and password were submitted
     if 'username' in request.form and 'password' in request.form:
         username = request.form['username']
         password = request.form['password']
         cur = db.execute('Select * FROM users where username = ?', [username])
         account = cur.fetchone()
+
+        # check the submitted username and password agains the users in the users table.
         if account:
             pass_check = werkzeug.security.check_password_hash(account['password'], password)
+            # if username and password are correct then set the appropriate session keys to their corresponding values in the database
+            # for the logged in user and redirect to the home page
             if pass_check:
                 session['logged_in'] = True
                 session['id'] = account['id']
@@ -136,6 +153,7 @@ def login():
                 session['isadmin'] = account['isadmin']
                 flash('Signed in successfully !')
                 return redirect(url_for('show_index'))
+            # otherwise flash the appropriate error message and redirect to the login page
             else:
                 flash('Incorrect username / password !')
                 return redirect(url_for('loginpage'))
@@ -152,6 +170,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    # delete all the session keys form the session dict
     session.pop('logged_in', None)
     session.pop('id', None)
     session.pop('username', None)
@@ -164,7 +183,6 @@ def logout():
 def loginpage():
     return render_template('login.html')
 
-
 @app.route('/registerpage')
 def registerpage():
     return render_template('register.html')
@@ -173,6 +191,7 @@ def registerpage():
 @app.route('/leaderboard')
 def leaderBoard():
     db = get_db()
+    # get all users order by highscore in descending order
     cur = db.execute('select * from users order by highscore desc')
     leaders = cur.fetchall()
     cur = db.execute('select * from users order by id asc')
@@ -182,16 +201,20 @@ def leaderBoard():
 
 @app.route('/profile')
 def profile():
+    # get username of logged in user from quesry string
     username = request.args.get('user_profile')
     db = get_db()
 
+    # get all the attempts for that user
     cur = db.execute('select * from attempts where user = ? order by id DESC', [username])
     attempts = cur.fetchall()
     count = 0
     sum_wpm = 0
     sum_acc = 0
+
+    # if that user has attempted challlenges, then get thier highscore and calculate their avrage wpm and accuracy
     if attempts:
-        cur = db.execute('select * from users where username = ? order by id DESC', [username])
+        cur = db.execute('select * from users where username = ?', [username])
         account = cur.fetchone()
         highscore = account['highscore']
         for i in attempts:
@@ -207,12 +230,14 @@ def profile():
 
 @app.route('/check_highscore', methods=['POST'])
 def check_highscore():
+    # get the score from the latest attempt and username
     score = int(request.form['highscore'])
     user_id = request.form['user_id']
     db = get_db()
     cur = db.execute('SELECT * FROM users WHERE id = ?', [user_id])
     account = cur.fetchone()
 
+    # check if score is greater than the current highscore in the database. if it is then update the highscore in the databse
     if (score > account['highscore']):
         db.execute('UPDATE users SET highscore = ? WHERE id = ?', [score, user_id])
         db.commit()
@@ -223,12 +248,15 @@ def check_highscore():
 
 @app.route('/attempts', methods=['POST'])
 def addAttempts():
+    # get all the results from the challenge and its date
     wpm = request.form['wpm']
     accuracy = request.form['acc']
     acc_wpm = request.form['acc_wpm']
     user = request.form['user_name']
     date = request.form['date']
     db = get_db()
+
+    # insert them into the database
     db.execute('INSERT INTO attempts (user,wpm,accuracy,acc_wpm,date) VALUES(?,?,?,?,?)',
                [user, wpm, accuracy, acc_wpm, date])
     db.commit()
@@ -243,6 +271,8 @@ def add_text():
 @app.route('/submit_challenge_text', methods=['POST'])
 def submit_text():
     db = get_db()
+
+    # insert the text from the form into the database
     db.execute('INSERT INTO challengeText (title,text) VALUES("challengetext",?)',
                [request.form['text']])
     db.commit()
