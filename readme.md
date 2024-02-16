@@ -1,4 +1,4 @@
-#Project for CS 253 with Ali, Joe, Zay, and Rahul.
+# Project for CS 253 with Ali, Joe, Zay, and Rahul.
 
 ## Description
 TYPO is a web application designed to help users improve their typing skills. Built using Python and the Flask Web Framework, TYPO allows users to create personalized profiles to track their typing statistics and progress over time.
